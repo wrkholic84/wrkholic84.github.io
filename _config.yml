@@ -66,8 +66,8 @@ staticman:
 reCaptcha:
   siteKey                :
   secret                 :
-# atom_feed:
-#   path                   : # blank (default) uses feed.xml
+atom_feed:
+  path                   : # blank (default) uses feed.xml
 search                   : true
 search_full_content      : true
 search_provider          : # lunr (default), algolia, google
@@ -233,7 +233,7 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
-  # - jekyll-feed
+  - jekyll-feed
   - jekyll-include-cache
 
 # mimic GitHub Pages with --safe
@@ -241,7 +241,7 @@ whitelist:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
-  # - jekyll-feed
+  - jekyll-feed
   - jekyll-include-cache
 
 
