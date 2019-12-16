@@ -23,7 +23,7 @@ title                    : "COMPUTECH+"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "YOUNGMIN KIM"
-description              : "All kinds of IT"
+description              : "All Kinds of IT"
 url                      : "https://wrkholic84.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -112,7 +112,7 @@ analytics:
 author:
   name             : "YOUNGMIN KIM"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "All kinds of IT."
+  bio              : "All Kinds of IT."
   location         : "Seoul, Korea"
   email            : "wrkholic84@gmail.com"
   links:
