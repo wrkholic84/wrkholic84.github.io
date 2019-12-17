@@ -10,14 +10,15 @@ date: 2018-12-27 00:00:00 +0900
 따라서 iOS 11.4 Beta3 이하 버전의 탈옥된 아이폰을 사용하는 것이 좋다. 탈온된 아이폰에서 Frida를 이용한 애플리케이션(이하 앱) 분석 및 공격 방법을 알아보자.
 
 ## Jailbreak iPhone
-iOS 버전에 따라 다양한 Jailbreak 툴을 사용할 수 있다. 가장 최신 버전의 iOS를 위한 Jailbreak 툴을 소개하자면, Coolstar의 Electra가 있다. 11.2 부터 11.4 Beta3 까지 지원한다. 가지고 있는 아이폰의 iOS 버전을 확인하고 그에 맞는 Jailbreak 툴을 이용하면 된다. 자신의 아이폰이 iOS 11.4.1 이상 버전이라면 다른 아이폰을 구해보도록 하자.
+iOS 버전에 따라 다양한 Jailbreak 툴을 사용할 수 있다. 가장 최신 버전의 iOS를 위한 Jailbreak 툴을 소개하자면, Coolstar의 [Electra](https://coolstar.org/electra/)가 있다. 11.2 부터 11.4 Beta3 까지 지원한다. 가지고 있는 아이폰의 iOS 버전을 확인하고 그에 맞는 Jailbreak 툴을 이용하면 된다. 자신의 아이폰이 iOS 11.4.1 이상 버전이라면 다른 아이폰을 구해보도록 하자.
 
 ## Cydia
 Cydia는 탈옥된 iOS 디바이스를 위한 앱 스토어다. 애플의 앱 스토어에서 설치할 수 없는 앱 또는 기능 개선을 위한 트윅(tweak)을 설치할 수 있다. iOS 앱 해킹을 위해 기본적으로 BigBoss Recommended Tools, OpenSSH, Frida와 같은 트윅을 설치한다. Jailbreak 툴을 사용해 탈옥을 하면 보통 자동으로 설치 되지만 간혹 함께 설치 되지 않는 경우도 있어 직접 설치해야 할 때도 있다. (Cydia를 만든 Jay Freeman이 곧 Cydia를 폐쇄 한다고 한다.)
 
 ## Install Frida Server on iPhone
-Cydia에서 Frida를 설치해보자. frida.re에서 간단한 설치 방법을 확인할 수 있다.
-* Sources(소스) 탭 -> Edit(편집) -> Add(추가) -> https://build.frida.re 
+Cydia에서 Frida를 설치해보자. [frida.re](https://frida.re/docs/ios/)에서 간단한 설치 방법을 확인할 수 있다.
+
+**Sources(소스) 탭 -> Edit(편집) -> Add(추가) -> https://build.frida.re**
 
 ![00](/assets/images/posts/20181227FridaForiOS/00.png)
 
@@ -28,19 +29,19 @@ Cydia에서 Frida를 설치해보자. frida.re에서 간단한 설치 방법을 
 현재 버전은 12.2.27이다. 이어서 설치할 Frida CLI Tools의 Major 버전이 일치해야 제대로 동작한다. Frida tools의 버전은 12.2.x 여야 한다.
 
 ## Install Frida’s CLI Tools on your Mac
-Frida 서버에 스크립트를 전달하기 위해 Python을 사용한다.(Command 1) 이 때 사용할 Python용 Frida 라이브러리를 설치한다. Python 3 를 사용하여 전달하기로 한다.(Command 2)
-아이폰에 설치된 Frida 서버와 통신하고 간단한 명령을 전달하기위해 사용자의 컴퓨터에 Frida 툴(Frida’s CLI tools)을 설치해야 한다. 설치를 위해 Python이 설치되어 있어야 하는데, Python 2.7을 사용하는 것을 추천한다. (Command 3,4)
+Frida 서버에 스크립트를 전달하기 위해 Python을 사용한다. **(Command 1)** 이 때 사용할 Python용 Frida 라이브러리를 설치한다. Python 3 를 사용하여 전달하기로 한다.**(Command 2)**
+아이폰에 설치된 Frida 서버와 통신하고 간단한 명령을 전달하기위해 사용자의 컴퓨터에 Frida 툴(Frida’s CLI tools)을 설치해야 한다. 설치를 위해 Python이 설치되어 있어야 하는데, Python 2.7을 사용하는 것을 추천한다. **(Command 3,4)**
 ### Commands:
-1. brew install python3 (Python 3 설치(brew for Mac))
-2. pip3 install frida (Python3 용 Frida 라이브러리 설치)
-3. sudo easy_install pip (Python 2.7 패키지 관리자 설치 - 기본적으로 설치되어있지 않다.)
-4. sudo -H pip install frida-tools (Python 2.7 버전의 Frida-tools 설치)
+1. <U>brew install python3</U> (Python 3 설치(brew for Mac))
+2. <U>pip3 install frida</U> (Python3 용 Frida 라이브러리 설치)
+3. <U>sudo easy_install pip</U> (Python 2.7 패키지 관리자 설치 - 기본적으로 설치되어있지 않다.)
+4. <U>sudo -H pip install frida-tools</U> (Python 2.7 버전의 Frida-tools 설치)
 * pip3로 설치하지 않는 이유는 pip3의 frida-tools는 인코딩 버그가 있어 한글이 제대로 표시되지 않는다.
-* Module six 관련 에러가 날 경우 sudo -H pip install frida-tools --ignore-installed six 로 설치
+* Module six 관련 에러가 날 경우 <U>sudo -H pip install frida-tools --ignore-installed six</U> 로 설치
 
 ## Test Frida
 여기까지 Frida를 실행할 준비를 마쳤다. 아이폰을 컴퓨터에 연결하고 frida-ps -U 명령을 실행해보자.
-위 명령이 정상적으로 실행되었다면 현재 아이폰에서 동작중인 프로세스의 목록을 볼 수 있을 것이다. 앞으로 자주 사용하게 될 명령 frida-ps -Uai 도 실행해보자. 프로세스의 Identifier를 출력해준다. 주로 앱의 Identifier를 이용해 앱에 접근해 공격을 실행할 것이다.
+위 명령이 정상적으로 실행되었다면 현재 아이폰에서 동작중인 프로세스의 목록을 볼 수 있을 것이다. 앞으로 자주 사용하게 될 명령 <U>frida-ps -Uai</U> 도 실행해보자. 프로세스의 Identifier를 출력해준다. 주로 앱의 Identifier를 이용해 앱에 접근해 공격을 실행할 것이다.
 
 ## Sandbox
 아이폰은 보안을 위해 Sandbox라는 개념을 가지고 있다. Sandbox는 커널 수준에서 시행되는 접근 제어 기술이다. 앱을 실행할 때 격리된 공간(Sandbox)을 제공하고 그곳을 벗어나 허용되지 않은 작업을 하지 못하도록 방지하는 기술이다.
@@ -59,7 +60,7 @@ Frida 스크립트를 작성하기 전에 앱 분석을 먼저 해야 한다. �
 
 ![04](/assets/images/posts/20181227FridaForiOS/04.png)
 
-Clutch 를 이용해 앱을 복호화하면 분홍색으로 복호화된 실행파일의 경로를 표시해준다. 위 예시의 경우 /var/tmp/clutch/8595636C-4456-4061-9E70-7F4CB5E21995 에 있는 실행파일을 가져오면 된다.
+Clutch 를 이용해 앱을 복호화<sup id="a1">[1](#footnote1)</sup>하면 분홍색으로 복호화된 실행파일의 경로를 표시해준다. 위 예시의 경우 /var/tmp/clutch/8595636C-4456-4061-9E70-7F4CB5E21995 에 있는 실행파일을 가져오면 된다.
 
 ## Open the Binary with IDA
 아이폰에서 다운로드한 실행파일을 IDA 를 이용해 열어보자. 
@@ -75,25 +76,25 @@ IDA의 Functions에서 확인할 수 있는 Objective C 함수의 특징을 살�
 
 ![06](/assets/images/posts/20181227FridaForiOS/06.png)
 
-1. -[exchange.AppDelegate application:didFinishLaunch:] : 
+1. **-[exchange.AppDelegate application:didFinishLaunch:]** : 
 Objective C의 기본적인 함수의 형태다. (-)로 시작하는 함수는 인스턴스 함수를 의미하며 (+)로 시작하는 함수는 클래스 함수다. [Object Method:Parameter ..] 로 구성되어 있다.  오른쪽 그림과 같이 somePerson 객체에 존재하는 sayHello 함수를 호출하면 XYZPerson 클래스에 있는 sayHello 함수가 호출되는 방식이다.  sayHello 함수에서 다시 함수가 호출되는데, 여기서 사용된 self는 C++의 this 포인터와 같은 역할을 한다. 자기 자신의 saySomething 함수를 호출한다. 콜론(:)을 구분자로 파라미터를 전달할 수 있다. 
-2. sub_100016928 : 심볼(Symbol) 정보가 없는 함수다. 함수의 주소값을 이용해 함수에 접근할 수 있다. Objective C 컴파일러에 의한 코드 최적화 과정에서 코드의 일부가 별도의 함수로 분리된 경우도 이에 속한다. 이 함수와 연관된 Caller 함수는 가까운 주소에 위치하고 있다.
-3. nullsub_() : 프로그램에 실제로 존재하는 코드이긴 하나, 최종 버전에는 존재하지 않는 호출이다. 함수의 값이 0으로 설정된 경우 return 과 같은 역할을 한다.
+2. **sub_100016928** : 심볼(Symbol) 정보가 없는 함수다. 함수의 주소값을 이용해 함수에 접근할 수 있다. Objective C 컴파일러에 의한 코드 최적화 과정에서 코드의 일부가 별도의 함수로 분리된 경우도 이에 속한다. 이 함수와 연관된 Caller 함수는 가까운 주소에 위치하고 있다.
+3. **nullsub_()** : 프로그램에 실제로 존재하는 코드이긴 하나, 최종 버전에는 존재하지 않는 호출이다. 함수의 값이 0으로 설정된 경우 return 과 같은 역할을 한다.
 
 ## Objective C - Basic #2. objc_msgSend
 
-Message Send는 Objective C를 대표하는 가장 중요한 개념이다. 앞서 살펴본 바와 같이 대괄호 [ ] 사이에 쓰여지는 코드에 의해 Objective C 메시지를 생성한다. Objective C 코드로 [receiver message] 와 같이 메시지를 보낸다고 하면 컴파일러는 objc_msgSend(receiver, selector)로 코드를 바꾼다. 인자가 있을 경우 objc_msgSend(receiver, selector, arg1, arg2, ..) 로 바꾼다. 
+Message Send는 Objective C를 대표하는 가장 중요한 개념이다. 앞서 살펴본 바와 같이 대괄호 [ ] 사이에 쓰여지는 코드에 의해 Objective C 메시지를 생성한다. Objective C 코드로 **[receiver message]** 와 같이 메시지를 보낸다고 하면 컴파일러는 **objc_msgSend(receiver, selector)**로 코드를 바꾼다. 인자가 있을 경우 **objc_msgSend(receiver, selector, arg1, arg2, ..)** 로 바꾼다. 
 Objective C가 receiver에게 message를 전달하면 대상 객체(receiver)는 메시지(message)가 누구로부터 왔는지, 클래시 캐시(Classh cache)와 클래스 디스패치 테이블(class dispatch table)을 검색하여 어떤 함수를 실행할지 등의 결정을 한다.
 
 예를 들어, 다음 코드는
 
-​```objective-c
+​```
 [self printMessageWithString:@"Hello world!"];
 ​```
 
 컴파일되면 실제로 아래와 같은 코드로 변환되고,
 
-​```objective-c
+​```
 objc_msgSend(self, @selector(printMessageWithString:), @"Hello world");
 ​```
 
@@ -102,9 +103,9 @@ objc_msgSend(self, @selector(printMessageWithString:), @"Hello world");
 ## Trace Functions 
 Frida는 frida-tools에 포함된 명령어를 이용하는 방법과 Frida API를 활용한 스크립트 인젝션(Injection) 두가지 방법으로 사용할 수 있다. 좀 더 자유로운 Frida 사용을 위해 Frida API를 이용해 앱을 후킹(Hooking) 해보자. iOS 앱의 기본이자 앱의 시작인 AppDelegate 클래스를 추적할 것이다. 사용한 스크립트는 0xdea/frida-scripts를 참조하여 작성하였다.
 스크립트를 다운로드 받아 raptor_frida_ios_trace.js(이하 trace.js) 파일을 열고 코드 마지막 부분에 아래와 같이 trace("-[exchange.AppDelegate *]”) 를 작성하여 저장하여 아래 명령을 실행해보자.
-
-* frida -U -f com.bitxflow.exchange -l ./raptor_frida_ios_trace.js --no-pause
-
+```
+$ frida -U -f com.bitxflow.exchange -l ./raptor_frida_ios_trace.js --no-pause
+```
 옵션을 간단히 살펴보면 -U 옵션은 USB 연결, -F 옵션은 실행(spawn)할 앱의 패키지 명, -L 옵션은 불러올 스크립트 파일명, 그리고 --no-pause는 앱을 시작시킨 후 멈춤없이 진행하는 것을 뜻한다.
 
 ![07](/assets/images/posts/20181227FridaForiOS/07.png)
@@ -116,7 +117,7 @@ Debug라는 제목을 쓰긴 했지만 Frida는 후킹(Hooking)을 이용하기 
 
 ![08](/assets/images/posts/20181227FridaForiOS/08.png)
 
-앱의 동작 과정 중 Google Firebase OAuth 인증의 일부분을 확인해보았다. FIRAuth 클래스에 있는 canHandleURL 함수의 인자(arg)값과 리턴(retval)값을 확인해보았는데, 인자값으로 Google에 사용자 정보를 요청하는 것으로 보이는 URL을 전달받고, 아무것도 리턴하지 않았다. Interceptor.attach(oldImpl.implementation, {}) 에 있는 onEnter: function(args) {} 과 onLeave: function(retval) {} 함수를 고쳐 함수의 인자값과 리턴값을 변경할 수 있다.
+앱의 동작 과정 중 Google Firebase OAuth 인증의 일부분을 확인해보았다. FIRAuth 클래스에 있는 canHandleURL 함수의 인자(arg)값과 리턴(retval)값을 확인해보았는데, 인자값으로 Google에 사용자 정보를 요청하는 것으로 보이는 URL을 전달받고, 아무것도 리턴하지 않았다. Interceptor.attach(oldImpl.implementation, {}) 에 있는 **onEnter: function(args) {}** 과 **onLeave: function(retval) {}** 함수를 고쳐 함수의 인자값과 리턴값을 변경할 수 있다.
 
 ![09](/assets/images/posts/20181227FridaForiOS/09.png)
 
@@ -130,10 +131,12 @@ IDA 에서 확인할 수 있는 sub_100016928 함수는 AppDelegate 함수에서
 ## Frida CodeShare
 보안을 위해 앱들이 가지고 있는 공통적인 기능(예를 들면, SSL Pinning, Anti Jailbreak 등)들이 있다. 이 기능들은 앱 점검을 위해 반드시 우회해야 하는 기능들이다. 이 기능들의 구현은 거의 비슷한 방법으로 이루어지기 때문에 Frida 스크립트를 이용해 우회 한다면 거의 동일한 코드가 작성될 것이다. 이 번거로움을 피하기 위해 Frida CodeShare Project가 만들어졌다. Frida CodeShare Project는 세계 각국의 개발자들로 구성되어 있으며, 다양한 아이디어를 공유하기 위해 만들어졌다. 여기서 우리는 앱의 다양한 보안 기능을 우회하거나 조작할 수 있다.
 대표적으로 ios-ssl-bypass 코드가 있다. SSL Pinning 기술을 통해 서버와 통신하는 내용을 안전하게 보호할 수 있지만, 이 코드를 사용하면 손쉽게 우회가 가능하다. 별도의 코드 작성 없이 아래 명령
-
-* $ frida —codeshare dki/ios10-ssl-bypass -f <app identifier>
-
+```
+$ frida —codeshare dki/ios10-ssl-bypass -f <app identifier>
+```
 을 실행하면 보안 기능이 바로 우회된다. 다양한 코드가 공유되어 있으니, 검색해보자.
 
 ## To bring this session to an end
 Frida는 사용하는 방법에 따라 무한한 잠재력을 가지고 있고, 계속해서 기능이 추가되고 있다. 최신 버전의 Frida는 커널도 다룰 수 있다. 아이폰뿐만 아니라 안드로이드, 일반 PC, Mac OS 에서 동작하는 앱도 후킹이 가능하다. 갈고 닦아 내 것으로 만들자!!
+
+><b id="footnote1">1</b> clutch를 이용해 복호화 하면 실행파일과 함께 사용된 라이브러리도 함께 복호화된다. clutch에 표시된 경로에서 실행파일을 찾아보자.
