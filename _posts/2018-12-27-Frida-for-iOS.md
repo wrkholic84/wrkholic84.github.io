@@ -67,7 +67,7 @@ Clutch 를 이용해 앱을 복호화<sup id="a1">[1](#footnote1)</sup>하면 �
 
 ![05](/assets/images/posts/20181227FridaForiOS/05.png)
 
-위 그림과 같이 IDA는 함수의 목록을 보여주는 Functions 부분과 함수의 내용을 표시해주는 Disassemble View 부분으로 나뉜다. Functions 에서 분석하고자 하는 대상의 함수를 먼저 찾고, Disassemble View 에서 함수의 내용을 확인한다. 함수를 분석하기 위해서는 Objective C 의 기본 문법에 대한 이해를 필요하다.
+위 그림과 같이 IDA는 함수의 목록을 보여주는 Functions 부분과 함수의 내용을 표시해주는 Disassemble View 부분으로 나뉜다. Functions 에서 분석하고자 하는 대상의 함수를 먼저 찾고, Disassemble View 에서 함수의 내용을 확인한다. 함수를 분석하기 위해서는 Objective C 의 기본 문법<sup id="a2">[2](#footnote2)</sup>에 대한 이해를 필요하다.
 
 ## Objective C - Basic #1. Functions
 
@@ -77,8 +77,8 @@ IDA의 Functions에서 확인할 수 있는 Objective C 함수의 특징을 살�
 ![06](/assets/images/posts/20181227FridaForiOS/06.png)
 
 1. **-[exchange.AppDelegate application:didFinishLaunch:]** : 
-Objective C의 기본적인 함수의 형태다. (-)로 시작하는 함수는 인스턴스 함수를 의미하며 (+)로 시작하는 함수는 클래스 함수다. [Object Method:Parameter ..] 로 구성되어 있다.  오른쪽 그림과 같이 somePerson 객체에 존재하는 sayHello 함수를 호출하면 XYZPerson 클래스에 있는 sayHello 함수가 호출되는 방식이다.  sayHello 함수에서 다시 함수가 호출되는데, 여기서 사용된 self는 C++의 this 포인터와 같은 역할을 한다. 자기 자신의 saySomething 함수를 호출한다. 콜론(:)을 구분자로 파라미터를 전달할 수 있다. 
-2. **sub_100016928** : 심볼(Symbol) 정보가 없는 함수다. 함수의 주소값을 이용해 함수에 접근할 수 있다. Objective C 컴파일러에 의한 코드 최적화 과정에서 코드의 일부가 별도의 함수로 분리된 경우도 이에 속한다. 이 함수와 연관된 Caller 함수는 가까운 주소에 위치하고 있다.
+Objective C의 기본적인 함수의 형태다. (-)로 시작하는 함수는 인스턴스 함수를 의미하며 (+)로 시작하는 함수는 클래스 함수다. [Object Method:Parameter ..] 로 구성되어 있다. 오른쪽 그림과 같이 somePerson 객체에 존재하는 sayHello 함수를 호출하면 XYZPerson 클래스에 있는 sayHello 함수가 호출되는 방식이다. sayHello 함수에서 다시 함수가 호출되는데, 여기서 사용된 self는 C++의 this 포인터와 같은 역할을 한다. 자기 자신의 saySomething 함수를 호출한다. 콜론(:)을 구분자로 파라미터를 전달할 수 있다. 
+2. **sub_100016928** : 심볼(Symbol) 정보가 없는 함수다. 함수의 주소값을 이용해 함수에 접근할 수 있다. Objective C 컴파일러에 의한 코드 최적화 과정에서 코드의 일부가 별도의 함수로 분리된 경우도 이에 속한다. 이 함수와 연관된 Caller 함수는 가까운 주소에 위치하고 있다.
 3. **nullsub_()** : 프로그램에 실제로 존재하는 코드이긴 하나, 최종 버전에는 존재하지 않는 호출이다. 함수의 값이 0으로 설정된 경우 return 과 같은 역할을 한다.
 
 ## Objective C - Basic #2. objc_msgSend
@@ -98,7 +98,7 @@ Objective C가 receiver에게 message를 전달하면 대상 객체(receiver)는
 objc_msgSend(self, @selector(printMessageWithString:), @"Hello world");
 ​```
 
-대상 객체의 isa 포인터를 이용하여 해당 메시지에 대한 셀렉터의 응답여부를 확인하고 실행한다. 실제로 objc_msgSend 함수는 아무값도 리턴하지 않지만, 이 메시지에 의해 실행되는 함수가 결과를 리턴하기 때문에 objc_msgSend가 리턴하는 것처럼 보인다.
+대상 객체의 **isa 포인터<sup id="a3">[3](#footnote2)</sup>**를 이용하여 해당 메시지에 대한 셀렉터의 응답여부를 확인하고 실행한다. 실제로 objc_msgSend 함수는 아무값도 리턴하지 않지만, 이 메시지에 의해 실행되는 함수가 결과를 리턴하기 때문에 objc_msgSend가 리턴하는 것처럼 보인다.
 
 ## Trace Functions 
 Frida는 frida-tools에 포함된 명령어를 이용하는 방법과 Frida API를 활용한 스크립트 인젝션(Injection) 두가지 방법으로 사용할 수 있다. 좀 더 자유로운 Frida 사용을 위해 Frida API를 이용해 앱을 후킹(Hooking) 해보자. iOS 앱의 기본이자 앱의 시작인 AppDelegate 클래스를 추적할 것이다. 사용한 스크립트는 0xdea/frida-scripts를 참조하여 작성하였다.
@@ -140,3 +140,7 @@ $ frida —codeshare dki/ios10-ssl-bypass -f <app identifier>
 Frida는 사용하는 방법에 따라 무한한 잠재력을 가지고 있고, 계속해서 기능이 추가되고 있다. 최신 버전의 Frida는 커널도 다룰 수 있다. 아이폰뿐만 아니라 안드로이드, 일반 PC, Mac OS 에서 동작하는 앱도 후킹이 가능하다. 갈고 닦아 내 것으로 만들자!!
 
 ><b id="footnote1">1</b> clutch를 이용해 복호화 하면 실행파일과 함께 사용된 라이브러리도 함께 복호화된다. clutch에 표시된 경로에서 실행파일을 찾아보자.
+
+><b id="footnote2">2</b> swift로 작성된 앱도 빌드 과정에서 Objective C로 변환되기 때문에 최종적으로 Objective C 문법을 이해하고 있어야 한다.
+
+><b id="footnote3">3</b> Objective C의 모든 객체는 isa라는 클래스 타입 맴버 변수를 가지고 있다. 다른 클래스를 가리키거나 자기 자신 클래스 객체를 가리키는데 쓰인다.
