@@ -23,7 +23,7 @@ title                    : "COMPRINCIPIA+"
 title_separator          : "-"
 subtitle                 : "Version 1.0"
 name                     : "YOUNGMIN KIM"
-description              : "All kinds of computer-related technical information"
+description              : "Philosophiae Computers Principia"
 url                      : "https://wrkholic84.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -112,7 +112,7 @@ analytics:
 author:
   name             : "YOUNGMIN KIM"
   avatar           : "/assets/images/profile.png"
-  bio              : "All Kinds of IT."
+  bio              : "Philosophiae Computers Principia"
   location         : "Seoul, Korea"
   email            : "wrkholic84@gmail.com"
   links:
