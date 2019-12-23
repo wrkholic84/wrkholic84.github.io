@@ -6,9 +6,7 @@ SaaS와 MBaaS에 대해 다룬 적이 있다. 글로벌 IT 기업들이 제공�
 
 ## Node JS 실행 환경
 사실 Javascript 런타임(프로그래밍 언어가 구동되는 환경)은 **브라우저**에만 있었다. 하지만 이 한계를 극복하고 Node.js가 만들어졌다. Node.js는 <U>REPL(Read, Eval, Print, Loop)</U>을 통해 런타임을 제공한다. 윈도우의 REPL커맨드 창이나, 리눅스의 터미널 환경처럼 사용자가 명령을 입력하면 시스템은 명령을 읽고(Read), 명령을 처리(Eval)한 후, 결과를 출력(Print)한다. 그리고 사용자가 Ctrl + C를 눌러 종료할 때까지 이 과정을 반복(Loop)한다. 또는 Javascript 파일을 Node.js 에서 제공하는 Javascript 런타임을 이용해 실행시킬 수 있다. 애플리케이션 서버를 제작할 때 보통 이 방식을 이용한다.
-
 ![00](/assets/images/posts/20180514NodeJSRCE/00.png)
-
 ## Serialization and IIFE
 Serialization(직렬화)은 객체를 직렬화하여 전송 가능한 형태로 만드는 것을 의미한다. 객체의 데이터를 연속적인 데이터로 변환하여 Stream을 통해 전달한다.
 
@@ -35,50 +33,31 @@ Node.js에 있는 ‘node-serialize’ 모듈의 unserialize 함수는 직렬화
 
 ## Exploit Test, 공격 테스트
 공격 코드를 만들 때 가장 쉽게 접근할 수 있는 방법은 서버의 취약한 코드를 그대로 사용해 보는 것이다. 아래 코드와 같이 ‘node-serialize’ 모듈의 serialize 함수를 이용해 공격 코드를 만들어 보자.
-
 ![02](/assets/images/posts/20180514NodeJSRCE/02.png)
-
 변수 y에 담긴 Javascript 함수는 서버의 루트(/) 디렉터리의 파일 목록을 화면에 표시해주는 코드다. 7번째 줄에서 이 코드(y)가 serialize 함수에 전달되어 serialize 된 코드가 아래와 같이 화면에 표시된다.
-
 ![03](/assets/images/posts/20180514NodeJSRCE/03.png)
-
 Javascript 코드가 serialize 되긴 했지만, 실행이 되지 않았다. 이유는 Javascript 함수를 IIFE 로 만들지 않았기 때문이다. IIFE로 만들어야 선언과 동시에 실행시킬 수 있다.
 
 위 Exploit Test Code #1에 있는 Javascript 함수 끝에 괄호를 추가해 IIFE 함수로 선언한다.
-
 ![04](/assets/images/posts/20180514NodeJSRCE/04.png)
-
 Serialize는 실패했지만, Javascript IIFE 코드는 잘 실행되었다. 최종적으로는 서버의 unserialize 함수를 공격하는 것이 목표이므로, unserialize 함수도 Javascript IIFE 함수를 잘 실행시키는지 확인한다.
-
 ![05](/assets/images/posts/20180514NodeJSRCE/05.png)
-
 앞서 Exploit Test Code #1의 결과로 만들어진 serialize된 Javascript 코드의 끝에 괄호를 추가해 IIFE Javascript 함수로 선언 뒤 unserialize 함수의 인자로 전달했다. 아래와 같이 잘 실행된다.
-
 ![06](/assets/images/posts/20180514NodeJSRCE/06.png)
 
 ## Reverse Shell Remote Code Execution
 이제 서버에 직접 공격을 해보도록 하자. 공격은 다음과 같이 구성했다.
-
 ![07](/assets/images/posts/20180514NodeJSRCE/07.png)
-
 서버에 보낼 공격 코드는 Reserve Shell<sup id="a2">[2](#footnote2)</sup> 코드다. 공격에 성공하면 서버는 공격자의 IP로 미리 열어둔 1337번 포트에 서버의 쉘을 전달한다. 공격자는 서버의 쉘을 획득할 수 있다. 공격 코드는 nodejsshell.py를 이용해 다음과 같이 만든다. 공격자의 IP는 192.168.0.3이고, Port는 1337번이다.
-
 ![08](/assets/images/posts/20180514NodeJSRCE/08.png)
-
 결과로 나온 Encoding 값을 보면 eval 함수와 String.fromCharCode 함수로 구성되어 있다. String.fromCharCode함수는 숫자를 문자로 변환해주고, eval 함수는 인자로 받은 Javascript 소스코드를 동적으로 실행시킨다.
-
 ![09](/assets/images/posts/20180514NodeJSRCE/09.png)
-
 서버에서 실행시킬 공격 코드를 만들었으니, 서버에 전달해보자. 서버의 동작 과정을 다시 떠올려보면, 서버는 먼저 사용자의 접속 요청에 담긴 쿠키 정보 중 profile에 담긴 데이터를 base64로 디코드 한다. 그리고 이 값을 unserialize 한다. 따라서 우리는 공격 코드를 base64로 인코딩해서 전달해야 한다. 뿐만 아니라, 공격 코드를 IIFE 함수로 선언해야 한다. 그래야 Result #2와 같이 전달과 동시에 코드가 실행된다.
-
 ![10](/assets/images/posts/20180514NodeJSRCE/10.png)
-
 Burp Suite의 Decoder 탭으로 이동해서 앞서 만든 공격 코드에 괄호를 추가해 base64 인코딩된 페이로드(Payload)를 만들어보자. 그리고 쿠키 헤더에 인코딩된 공격 코드를 담아 웹서버로 보낸다.
 
 아래와 같이 공격을 시도하면 공격자가 열어 놓은 1337번 포트에 서버의 쉘이 연결되는 것을 확인할 수 있다.
-
 ![11](/assets/images/posts/20180514NodeJSRCE/11.png)
-
 성공적으로 서버의 쉘과 루트(root) 권한을 획득했다.
 
 보통 Serialize 버그로 인한 취약점은 JAVA 에서 많이 발견되는데, Node.js에서 발견된 것은 이례적인 일이었다. CVE-2017-5941로 찾을 수 있는 이 공격은 node-serialize 0.0.4 버전에서 발생했으며, 아직 패치되지 않은 상태다.

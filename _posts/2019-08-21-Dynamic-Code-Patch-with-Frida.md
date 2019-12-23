@@ -13,17 +13,11 @@ Android나 iOS는 프로그램이 만들어지기 전에 코드 서명(Code Sign
 대상으로 정한 앱은 공개된 코드로 만들어진 m2048이라는 게임 앱이고, 해킹 방지를 위한 솔루션이 적용된 앱이다.
 솔루션이 적용된만큼 탈옥폰에서는 앱이 정상적으로 시작되지 않는다. 하지만 솔루션이 탈옥 여부를 확인하기 직전까지는 앱이 동작하기 때문에 분석의 여지는 충분히 있다.
 프로그램은 Init_Func(0x5d614) 함수부터 시작한다.
-
 ![00](/assets/images/posts/20190821DynamicCodePatchWithFrida/00.png)
-
 프로그램의 시작 부분을 더 자세히 확인하기 위해서 IDA를 사용해보자.
-
 ![01](/assets/images/posts/20190821DynamicCodePatchWithFrida/01.png)
-
 왼쪽 밑을 보면 솔루션이 적용된 탓으로 코드의 흐름을 따라가기 어렵게 되어 있다.
-
 ### Control-flow flattening이라 부른다. 코드의 흐름이 평평하게 나열된 많은 코드 블록으로 흩어진다.
-
 그리고 frida에서 확인한 것과 같이 Init_Func(0x5d614)이 시작된 이후 첫번째 함수 sub_10008A8B4를 호출한다.
 
 ## Aiming
@@ -31,13 +25,9 @@ Android나 iOS는 프로그램이 만들어지기 전에 코드 서명(Code Sign
 별 다른 수정을 하지 않는다면 솔루션이 적용된 프로그램이기 때문에 탈옥 탐지 관련 코드가 실행되고 비정상 종료될 것이다. 따라서 이번 코드 패치의 목적은 <U>탈옥 탐지 관련 코드를 건너 뛰는 것</U>이 될 것이다.
 
 방법은 매우 다양하겠지만 간단한 패치만으로 목적을 달성해보자. branch 명령만으로 프로그램의 실행 흐름을 변경할 것이다. (ARM64 opcode를 알아야 한다. 참고: [opcode converter online](http://armconverter.com/))
-
 ![02](/assets/images/posts/20190821DynamicCodePatchWithFrida/02.png)
-
 최종적으로 실행하고자 하는 목표 코드는 0x100005a98 주소에 있는 코드다. 목적지를 이곳으로 정한 이유는 IDA로 분석했을 때 앱의 Main 함수로 추측되는 부분이었기 때문이다.
-
 ![03](/assets/images/posts/20190821DynamicCodePatchWithFrida/03.png)
-
 그런데, 굳이 중간에 0x2decc 주소를 한 번 거친 후 0x5a98로 분기하는 이유는 ARM64 명령어가 한 번에 이동할 수 있는 거리에 제한이 있기 때문이다. 즉, 0x5d614에서 0x5a98까지 거리가 너무 멀다!!
 
 ## Code Segment
@@ -47,9 +37,7 @@ Android나 iOS는 프로그램이 만들어지기 전에 코드 서명(Code Sign
 
 ## Run Target Application with Frida
 공격에 쓰인 핵심 코드를 살펴보자.
-
 ![04](/assets/images/posts/20190821DynamicCodePatchWithFrida/04.png)
-
 [Line 2] : Init_Func 함수 포인터를 가져온다.
 
 [Line 3] : Memory.protect 함수를 이용해서 Init_Func 함수에 쓰기(Write) 속성을 추가한다.
@@ -61,15 +49,11 @@ Android나 iOS는 프로그램이 만들어지기 전에 코드 서명(Code Sign
 [Line 12] : [0x2E, 0x42, 0xFF, 0x17]로 바꾼다.
 
 그림으로 설명하자면, 아래와 같다.
-
 ![05](/assets/images/posts/20190821DynamicCodePatchWithFrida/05.png)
-
 Init_Func (0x5d614) 함수의 시작 코드 **SUB SP, SP #0xE0 [0x77, 0x83, 0x03, 0xD1]**를 우리가 원하는 **B 0x10002DECC [0x2E 0x42 0xFF 0x17]** 로 변경했다. B(Branch)는 프로그램의 실행을 주소값(0x10002DECC)으로 이동시키라는 의미다.
 
 실행 결과를 보면 다음과 같다.
-
 ![06](/assets/images/posts/20190821DynamicCodePatchWithFrida/06.png)
-
 앞에서 Caller 인 dyld!ImageLoaderMachO::doModInitFunctions는 0x5d614를 호출 했지만, 코드 패치를 통해 우리가 원하는 대로 0x2decc 함수를 호출했다.
 
 ## What about Android so file

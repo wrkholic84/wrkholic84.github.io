@@ -19,13 +19,9 @@ Cydia는 탈옥된 iOS 디바이스를 위한 앱 스토어다. 애플의 앱 �
 Cydia에서 Frida를 설치해보자. [frida.re](https://frida.re/docs/ios/)에서 간단한 설치 방법을 확인할 수 있다.
 
 **Sources(소스) 탭 -> Edit(편집) -> Add(추가) -> https://build.frida.re**
-
 ![00](/assets/images/posts/20181227FridaForiOS/00.png)
-
 그리고 나면 Search(검색) 탭에서 Frida를 찾을 수 있다. 설치하면 된다.
-
 ![01](/assets/images/posts/20181227FridaForiOS/01.png)
-
 현재 버전은 12.2.27이다. 이어서 설치할 Frida CLI Tools의 Major 버전이 일치해야 제대로 동작한다. Frida tools의 버전은 12.2.x 여야 한다.
 
 ## Install Frida’s CLI Tools on your Mac
@@ -46,36 +42,26 @@ Frida 서버에 스크립트를 전달하기 위해 Python을 사용한다. **(C
 ## Sandbox
 아이폰은 보안을 위해 Sandbox라는 개념을 가지고 있다. Sandbox는 커널 수준에서 시행되는 접근 제어 기술이다. 앱을 실행할 때 격리된 공간(Sandbox)을 제공하고 그곳을 벗어나 허용되지 않은 작업을 하지 못하도록 방지하는 기술이다.
 운영체제별로 다양한 형태로 Sandbox를 구현하고 있는데, 아이폰의 경우 아래 그림과 같이 구현되어 있다.
-
 ![02](/assets/images/posts/20181227FridaForiOS/02.png)
-
 Cydia에서 OpenSSH를 설치하고 root 계정으로 접속해보면 /var/containers/Bundle/Application에서 앱 리스트를 확인할 수 있다. 위 그림에서 총 6개의 앱들을 확인할 수 있는데, 예측하기 힘든 난수로 된 문자열의 폴더명을 가지고 있다. 앱이 설치되기 전까지 디렉터리의 이름을 알 수 없기 때문에 다른 앱이나 리소스가 접근할 수 없다. 
 
 ## Clutch and Get a binary from Application Sandbox
 Frida 스크립트를 작성하기 전에 앱 분석을 먼저 해야 한다. 앱이 어떻게 구현되어 있는지 알고 공격하고자 하는 위치를 정확히 알아야 그에 맞는 스크립트를 작성할 수 있다. 아이폰의 실행파일은 앞서 설명한 앱의 샌드박스에 들어있다. 샌드박스 안을 살펴보면 MyApp.app, Documents, Library 등의 폴더와 파일들이 존재하는데, 이 중에 MyApp.app 패키지 폴더에 실행파일이 들어있다. scp 또는 iFunbox 등을 이용해 다운로드 받으면 된다. 아래 예시에선 exchange라는 앱의 실행파일을 다운로드 받았다.
-
 ![03](/assets/images/posts/20181227FridaForiOS/03.png)
-
 앱 스토어에 배포된 앱을 분석할 경우, 실행파일이 암호화되어 있기 때문에 다운로드 받더라도 분석할 수 없다. 이 경우 Clutch를 이용해 복호화할 수 있다.
-
 ![04](/assets/images/posts/20181227FridaForiOS/04.png)
-
 Clutch 를 이용해 앱을 복호화<sup id="a1">[1](#footnote1)</sup>하면 분홍색으로 복호화된 실행파일의 경로를 표시해준다. 위 예시의 경우 /var/tmp/clutch/8595636C-4456-4061-9E70-7F4CB5E21995 에 있는 실행파일을 가져오면 된다.
 
 ## Open the Binary with IDA
 아이폰에서 다운로드한 실행파일을 IDA 를 이용해 열어보자. 
-
 ![05](/assets/images/posts/20181227FridaForiOS/05.png)
-
 위 그림과 같이 IDA는 함수의 목록을 보여주는 Functions 부분과 함수의 내용을 표시해주는 Disassemble View 부분으로 나뉜다. Functions 에서 분석하고자 하는 대상의 함수를 먼저 찾고, Disassemble View 에서 함수의 내용을 확인한다. 함수를 분석하기 위해서는 Objective C 의 기본 문법<sup id="a2">[2](#footnote2)</sup>에 대한 이해를 필요하다.
 
 ## Objective C - Basic #1. Functions
 
 IDA의 Functions에서 확인할 수 있는 Objective C 함수의 특징을 살펴보자.
 함수의 모양을 살펴보면 총 3가지 형태의 함수가 있다.
-
 ![06](/assets/images/posts/20181227FridaForiOS/06.png)
-
 1. **-[exchange.AppDelegate application:didFinishLaunch:]** : 
 Objective C의 기본적인 함수의 형태다. (-)로 시작하는 함수는 인스턴스 함수를 의미하며 (+)로 시작하는 함수는 클래스 함수다. [Object Method:Parameter ..] 로 구성되어 있다. 오른쪽 그림과 같이 somePerson 객체에 존재하는 sayHello 함수를 호출하면 XYZPerson 클래스에 있는 sayHello 함수가 호출되는 방식이다. sayHello 함수에서 다시 함수가 호출되는데, 여기서 사용된 self는 C++의 this 포인터와 같은 역할을 한다. 자기 자신의 saySomething 함수를 호출한다. 콜론(:)을 구분자로 파라미터를 전달할 수 있다. 
 2. **sub_100016928** : 심볼(Symbol) 정보가 없는 함수다. 함수의 주소값을 이용해 함수에 접근할 수 있다. Objective C 컴파일러에 의한 코드 최적화 과정에서 코드의 일부가 별도의 함수로 분리된 경우도 이에 속한다. 이 함수와 연관된 Caller 함수는 가까운 주소에 위치하고 있다.
@@ -114,18 +100,12 @@ $ frida -U -f com.bitxflow.exchange -l ./raptor_frida_ios_trace.js --no-pause
 
 ## Debug Function
 Debug라는 제목을 쓰긴 했지만 Frida는 후킹(Hooking)을 이용하기 때문에 정확한 의미에서 Debug는 아니다. 하지만 거시적 관점에서 앱 해킹을 할 때 Debugging을 통해 함수의 입/출력값 조작, 함수의 동작 변경을 수행하고 있기 때문에 Debug라고 해보자. 호출되는 함수들 중에 특정 함수를 살펴보고자 할 땐 다음과 같이 Frida를 사용할 수 있다. 예제 코드는 raptor_frida_ios_autoIntercept.js(이하 autoIntercept.js)를 사용하였다.
-
 ![08](/assets/images/posts/20181227FridaForiOS/08.png)
-
 앱의 동작 과정 중 Google Firebase OAuth 인증의 일부분을 확인해보았다. FIRAuth 클래스에 있는 canHandleURL 함수의 인자(arg)값과 리턴(retval)값을 확인해보았는데, 인자값으로 Google에 사용자 정보를 요청하는 것으로 보이는 URL을 전달받고, 아무것도 리턴하지 않았다. Interceptor.attach(oldImpl.implementation, {}) 에 있는 **onEnter: function(args) {}** 과 **onLeave: function(retval) {}** 함수를 고쳐 함수의 인자값과 리턴값을 변경할 수 있다.
-
 ![09](/assets/images/posts/20181227FridaForiOS/09.png)
-
 ## Convert IDA address to memory address
 함수의 심볼정보가 없는 함수(예. sub_100016928)의 경우 앞서 사용한 스크립트를 이용해 공격할 수가 없다. IDA에서 확인한 함수의 주소값을 이용해 직접 함수를 후킹해야 한다. 아래 memAddress 함수를 이용해 IDA에서 확인한 주소로 함수가 앱에서 동작할 때의 주소를 가져올 수 있다.
-
 ![10](/assets/images/posts/20181227FridaForiOS/10.png)
-
 IDA 에서 확인할 수 있는 sub_100016928 함수는 AppDelegate 함수에서 호출하고 있는 함수다. 별도의 심볼정보가 없기때문에 함수 명을 이용하지 않고, memAddress 함수를 만들어서 함수의 주소를 가져왔다. memAddress 함수의 세 번째 인자에 IDA 에서 확인한 함수의 주소값을 넣어주는데, 0x100016928이 아닌 0x16928인 이유는 IDA가 실행파일 분석 시 사용한 베이스 주소 0x100000000 를 제외한 값이다.
 
 ## Frida CodeShare
