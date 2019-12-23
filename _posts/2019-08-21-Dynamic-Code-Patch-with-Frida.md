@@ -61,3 +61,5 @@ Init_Func (0x5d614) 함수의 시작 코드 **SUB SP, SP #0xE0 [0x77, 0x83, 0x03
 위와 같은 방식으로 안드로이드의 so(shared object) 파일을 후킹하여 코드 수정을 할 수 있다. Give it a go!
 
 iOS, Android 모두 코드 서명 과정을 거쳐 코드 패치 공격으로부터 프로그램을 보호하고 있다. 하지만 Frida를 이용한 동적 코드 패치 공격을 활용하면 코드 서명을 우회하여 우리가 원하는대로 프로그램을 수정할 수 있는 장점이 있다. 특히 탈옥/루팅 방지 보안 솔루션이 적용된 경우 많은 도움이 된다.
+
+[PDF 다운로드](/assets/images/posts/20190821DynamicCodePatchWithFrida/DynamicCodePatchWithFrida.pdf)
