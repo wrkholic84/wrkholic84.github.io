@@ -119,6 +119,8 @@ $ frida —codeshare dki/ios10-ssl-bypass -f <app identifier>
 ## To bring this session to an end
 Frida는 사용하는 방법에 따라 무한한 잠재력을 가지고 있고, 계속해서 기능이 추가되고 있다. 최신 버전의 Frida는 커널도 다룰 수 있다. 아이폰뿐만 아니라 안드로이드, 일반 PC, Mac OS 에서 동작하는 앱도 후킹이 가능하다. 갈고 닦아 내 것으로 만들자!!
 
+[PDF 다운로드](/assets/images/posts/20181227FridaForiOS/FridaForIOS.pdf)
+
 ><b id="footnote1">1</b> clutch를 이용해 복호화 하면 실행파일과 함께 사용된 라이브러리도 함께 복호화된다. clutch에 표시된 경로에서 실행파일을 찾아보자.
 
 ><b id="footnote2">2</b> swift로 작성된 앱도 빌드 과정에서 Objective C로 변환되기 때문에 최종적으로 Objective C 문법을 이해하고 있어야 한다.

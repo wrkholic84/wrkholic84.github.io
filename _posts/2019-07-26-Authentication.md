@@ -145,3 +145,5 @@ Token 검증 과정
 3. Refresh Token이 만료되면 Resource Owner는 다시 로그인.
 
 물론, OAuth 2.0에도 취약점이 존재한다. CSRF 공격이나 Covert Redirect 공격에 취약할 수 있다. 그리고 구현이 매우 복잡한데, 제대로 구현한다면 이 방법만큼 안전하고 편리한 인증방법이 또 있을까?
+
+[PDF 다운로드](/assets/images/posts/20190726Authentication/Authentication.pdf)

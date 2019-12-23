@@ -64,6 +64,8 @@ Burp Suite의 Decoder 탭으로 이동해서 앞서 만든 공격 코드에 괄�
 
 Node.js로 서버를 구현할 때 이 모듈을 사용한 serialize / unserialize 는 지양해야 한다. Serialize-to-js 모듈에서도 비슷한 버그(CVE-2017-5954)가 있는 것으로 알려져 있다.
 
+[PDF 다운로드](/assets/images/posts/20180514NodeJSRCE/NodeJSRCE.pdf)
+
 ><b id="footnote1">1</b> 서버 시스템에 대해 신경쓰지 않아도 된다는 점에서 PaaS와 헷갈릴 수 있는데, PaaS는 서비스가 24시간 동작하는 반면, FaaS는 특정 이벤트가 발생했을 때에만 실행되며, 작업을 마치면 종료되는 차이점이 있다.
 
 ><b id="footnote2">2</b> Shell(쉘) : 서버나 휴대폰같은 장치에서 명령을 실행하기 위해 사용되는 프로그램.
