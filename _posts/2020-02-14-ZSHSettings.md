@@ -63,4 +63,18 @@ ZSH_THEME="agnoster"
 -> ~ source ~/.zshrc
 ```
 
+## VIM 꾸미기
+하는김에..
+```console
+wrkholic84 > vi ~/.vimrc
+set hlsearch
+set ruler
+set autoindent
+set cindent
+set nu
+set ts=4
+set shiftwidth=4
+syntax on
+```
+
 끝.
