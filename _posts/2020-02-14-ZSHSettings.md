@@ -48,7 +48,8 @@ plugins=(
 ```
 
 ## Powerline font 설치
-https://github.com/powerline/fonts/blob/master/Meslo%20Slashed/Meslo%20LG%20M%20Regular%20for%20Powerline.ttf
+[Download Meslo LG M Regular for Powerline](https://github.com/powerline/fonts/blob/master/Meslo%20Slashed/Meslo%20LG%20M%20Regular%20for%20Powerline.ttf
+)
 
 다운로드 후 설치.
 사용하고자 하는 IDE 등에서 font-famliy에 `Meslo LG M Regular for Powerline` 입력
