@@ -55,9 +55,27 @@ IAM은 모니터링하고 감시하는 기능이 필요하다. 역할 분리, �
 
 ## Identity Management
 이제 클레임 기반 인증에 대한 이해가 생겼지만 대부분의 애플리케이션에는 여전히 사용자 정보를 관리해야 한다.  오늘날 많은 회사에선 사용자를 생성하고 관리하기 위해 중앙 집중식 인적 자원 시스템을 사용하고 있다. 이 시스템은 IdP에 사용자를 보내주고, IdP는 애플리케이션에 사용자를 전달한다.
+![04](/assets/images/posts/20200410EnterpriseIAM/04.png)
 
 ## Metadirectory
-하지만, 대기업의 경우 더 많은 중앙 집중식 시스템이 필요하고, 다양한 사용자 저장소가 있다. 따라서 메타 디렉토리를 중앙 집중식 단일 지점으로 통합한다. 이 메타 디렉토리는 인적 자원 시스템에 의해 제공된다. 메타 디렉토리에서 사용자는 다른 시스템 중 하나와 동기화된다. 이 방법으로 사용자의 전체 수명주기는 메타 디렉토리에서 동작한다.
+하지만, 대기업의 경우 더 많은 중앙 집중식 시스템이 필요하고, 다양한 사용자 저장소가 있다. 따라서 메타 디렉토리를 중앙 집중식 단일 지점으로 통합한다. 이 메타 디렉토리는 인적 자원 시스템에 의해 제공된다. 메타 디렉토리에서 사용자는 다른 시스템 중 하나와 동기화된다. 이 방법으로 사용자의 전체 수명주기는 메타 디렉토리를 기반으로 동작한다.
+![05](/assets/images/posts/20200410EnterpriseIAM/05.png)
 
 ## Realm/Security Domain
-클레입 기반 인증에 대해 이야기 할 때 영역(Realm) 또는 보안 도메인(Security Domain)이란 단어를 자주 들어봤을 것이다. 영역이나 보안 도메인은 기본적으로 신뢰(Trust)의 범위다. 영역(Realm) 안에서 각 항목들은 서로를 신뢰한다. 그리고 클레임은 시스템에 대한 접속을 위해 사용된다. 하지만 여러 영역(Realm) 이나 보안 도메인(Security Doamin)이 있다면, 기본적으로 이들은 서로를 신뢰할 수 없다. 영역(Realm) A의 애플리케이션에 접속할 수 있도록 IdP(A) 에서 발급받은 클레임은 영역(Realm) B에서 사용할 수 없다. 
+클레임 기반 인증에 대해 이야기 할 때 영역(Realm) 또는 보안 도메인(Security Domain)이란 단어를 자주 들어봤을 것이다. 영역이나 보안 도메인은 기본적으로 신뢰(Trust)의 범위다. 영역(Realm) 안에서 각 항목들은 서로를 신뢰한다. 그리고 클레임은 시스템에 대한 접속을 위해 사용된다.
+![06](/assets/images/posts/20200410EnterpriseIAM/06.png)
+
+## Multiple Realms
+여러 영역(Realm) 이나 보안 도메인(Security Doamin)이 있다면, 기본적으로 이들은 서로를 신뢰할 수 없다. 영역(Realm) A의 애플리케이션에 접속할 수 있도록 IdP(A) 에서 발급받은 클레임은 영역(Realm) B에서 사용할 수 없다.
+![07](/assets/images/posts/20200410EnterpriseIAM/07.png)
+
+## Federation
+위와 같은 이유로 페더레이션(Federation, 통합)의 개념이 등장했다. 페더레이션을 사용하면 서로 다른 두 영역간 신뢰 관계를 설정할 수 있기 때문에 영역(Realm) B의 사용자가 영역(Realm) A의 애플리케이션에 접근할 수 있다. 
+![08](/assets/images/posts/20200410EnterpriseIAM/08.png)
+사용자는 자신의 로컬 IdP를 이용하여 인증한 다음 다른 영역(Realm)의 애플리케이션에 쉽게 접속할 수 있다.  사용자 관리는 각 영역(Realm) 내에서 처리된다. 즉, 영역(Realm) B의 사용자 관리자가 사용자에게 권한을 부여하지 않으면 사용자는 더 이상 접속 권한을 갖지 못한다. 영역(Realm) A의 관리자에게 알릴 필요도 없다. 사용자는 영역(Realm) B에서 한 번 권한을 잃게 되면 모든 곳에서 권한을 잃는다.
+
+## Level of Assurance
+영역(Realm)간 통합 시, 인증 수준에 대한 부분을 빼놓을 수 없는데, 다른 영역(Realm)의 프로세스, 시스템, 사용자, 관리자를 얼마나 신뢰하는지에 대한 것이다. 
+If know that in order for a user to be created in realm B the user must provide proper means of identification and in order to authenticate the user are prompted for multi-factor authentication my level of assurance is quite high but if a user can get a user account by simply filling in an anonymous form and are prompted for only username and password my level of assurance is of course quite low you can tie this to the fact that many claims include information about how the user was authenticated so you my have a trust established between two different realms but if the user is authenticated using a too weak of an authentication method. I may decide not to allow access many times I can redirect the user back to its home realm and in my redirect message requests for a higher level of authentication when you federate with many different entities you muse have a method of knowing the home realm of the user this is often referred to as tenant
+Home Realm/Tenant Discovery
+ discovery you can argue tenant discovery is more when using a SaaS application who have many different tenants and each tenant has its own Federation configuration. But the principle is the same a user connects영역(Realm)간
