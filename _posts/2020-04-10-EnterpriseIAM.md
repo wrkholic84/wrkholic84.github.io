@@ -81,10 +81,18 @@ IAM은 모니터링하고 감시하는 기능이 필요하다. 역할 분리, �
 클레임(Claim)과 관련하여 다양한 표준이 있는데, 이것은 클레임(Claim)에 다양한 내용이 포함될 수 있음을 의미한다. 하지만 최소한 고유한 사용자 식별자가 포함되어 있어야 한다. 클레임(Claim)은 서명(Sign)되는 경우도 있다. 이 경우 엔티티는 클레임(Claim)이 조작되지 않았는지 검증할 수 있다. 요즘엔 추가 보호를 위해 전체 클레임(Claim)을 암호화 하는 것이 일반화되어 있다. 어떤 클레임(Claim)에는 사용자가 인증 관리를 하는지 여부에 대한 정보가 들어있다. 이상하게 들릴 수 있는데, 사용자가 특정 인증 방법을 수행할 수 있는지 여부를 확인하기 위해 클레임(Claim)에 전달하는 경우도 있다. 인증 방법이 약하다고 판단되면 더 강력한 인증 방법을 사용하도록 사용자를 돌려보낼 수 있다. 어떤 표준은 다른 표준이 매우 엄격하게 다루는 클레임(Claim)에 매우 유연하다. 이메일 주소, 이름같은 것들을 확인하기도 한다. 클레임(Claim)에 역할, 그룹, 멤버십과 같은 것들을 전달한다.
 
 ## Claim Transformation
-클레임 (Claim)
-Sometimes you hear the word claim transforamtion so here's two example of claim transformation. In alternative one, I use one type of claim to gain access to an identity provider. in this case I use Kerberos once authenticated the identity provider sends me forward with a new kind of claim. this time is saml-based claim. another way of viewing claim transformation is if you change the content of the claim as an example the user may authenticate using username and password and thereby authenticate into the identity privider as an individual. But the application may not need individual users separation. so the only thing that may be needed in the claim is group membership or the role employee of a certain company.
+클레임 트랜스포메이션(Claim Transformation)의 두 가지 예시가 있다.
 ![09](/assets/images/posts/20200410EnterpriseIAM/09.png)
+첫 번째로, 한 가지 타입의 클레임으로 IdP에 권한을 얻기 위해 접속한다. Kerberos를 사용하였다. 인증되면, IdP는 새로운 종류의 클레임과 함께 다음 과정을 진행한다. 다음 과정은 SAML 기반의 클레임으로 진행된다.
+
 ![10](/assets/images/posts/20200410EnterpriseIAM/10.png)
+또 다른 방법으로, 예시처럼 클레임의 내용을 바꾼다면 사용자는 username과 password로 IdP에 개인을 인증한다. 그러나 애플리케이션은 개인 사용자를 구분할 필요가 없기때문에 클레임에서 필요한 것은 그룹 멤버십이나 직원의 역할 정도다.
 
 ## Chained Federation
-you can build chains of federating entities with each hop the 
+![11](/assets/images/posts/20200410EnterpriseIAM/11.png)
+클레임이 종료되고 새 클레임이 발행되는 경우 홉을 통해 전달되지 않은 각 홉으로 연합 엔티티 체인을 작성할 수 있습니다.이 예에서 애플리케이션은 체인의 마지막 ID 제공자 만 신뢰하며 마지막으로 멀티 팩터를 명확히하기 위해 인증 또는 MFA.
+통합 엔티티 체인을 구축 할 수 있다. 각 단계에서 클레임이 종료되고 새로운 클레임이 발행되고 클레임은 각 단계를 통과하지 않는다. 애플리케이션은 체인의 마지막 IdP만 신뢰한다.
+
+## Multi-Factor Authentication (MFA)
+![12](/assets/images/posts/20200410EnterpriseIAM/12.png)
+MFA는 최소한 두 가지 다른 요소를 필요로 해야한다는 것을 의미한다. 일반적으로 비밀번호, 핀, 인증서 또는 지문같은 것이다. username과 password를 사용했더라도 여전히 한 가지 요소만 사용한 것이다. 이것은 사용자를 귀찮게 했을뿐 신뢰성을 높이지는 못한 것이다.
