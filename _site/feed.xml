@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>COMPRINCIPIA+</title>
   <subtitle>Computer, Programming, Hacking, etc.</subtitle>
-  <updated>2022-12-26T15:54:55+09:00</updated>
+  <updated>2022-12-26T16:04:42+09:00</updated>
   <author>
     <name>wrkholic84</name>
     <uri>http://localhost:4000/</uri>
@@ -24,7 +24,7 @@
     <link href="http://localhost:4000/posts/EnterpriseIAM/" rel="alternate" type="text/html" title="Enterprise IAM" />
     <published>2020-04-10T00:00:00+09:00</published>
   
-    <updated>2020-05-01T18:08:30+09:00</updated>
+    <updated>2022-12-26T15:56:50+09:00</updated>
   
     <id>http://localhost:4000/posts/EnterpriseIAM/</id>
     <content src="http://localhost:4000/posts/EnterpriseIAM/" />
@@ -68,7 +68,7 @@ Single Sign-On
     <link href="http://localhost:4000/posts/ZSHSettings/" rel="alternate" type="text/html" title="ZSH Settings" />
     <published>2020-02-14T00:00:00+09:00</published>
   
-    <updated>2020-02-14T10:44:07+09:00</updated>
+    <updated>2022-12-26T15:56:50+09:00</updated>
   
     <id>http://localhost:4000/posts/ZSHSettings/</id>
     <content src="http://localhost:4000/posts/ZSHSettings/" />
@@ -114,7 +114,7 @@ foo@bar:~$ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/too
     <link href="http://localhost:4000/posts/TorAsASOCKSProxy/" rel="alternate" type="text/html" title="Tor as a SOCKS Proxy" />
     <published>2020-01-12T00:00:00+09:00</published>
   
-    <updated>2020-01-12T00:00:00+09:00</updated>
+    <updated>2022-12-26T15:56:50+09:00</updated>
   
     <id>http://localhost:4000/posts/TorAsASOCKSProxy/</id>
     <content src="http://localhost:4000/posts/TorAsASOCKSProxy/" />
@@ -155,7 +155,7 @@ The Onion Router의 약자다. 한국에선 ‘토르’라고 부르는데 사�
     <link href="http://localhost:4000/posts/SemanticVersioning/" rel="alternate" type="text/html" title="Semantic Versioning(SemVer)" />
     <published>2020-01-06T00:00:00+09:00</published>
   
-    <updated>2020-01-07T12:53:23+09:00</updated>
+    <updated>2022-12-26T15:56:50+09:00</updated>
   
     <id>http://localhost:4000/posts/SemanticVersioning/</id>
     <content src="http://localhost:4000/posts/SemanticVersioning/" />
@@ -207,7 +207,7 @@ libC 1.2...
     <link href="http://localhost:4000/posts/Dynamic-Code-Patch-with-Frida/" rel="alternate" type="text/html" title="Dynamic Code Patch with Frida" />
     <published>2019-08-21T00:00:00+09:00</published>
   
-    <updated>2019-12-23T14:41:22+09:00</updated>
+    <updated>2022-12-26T15:56:50+09:00</updated>
   
     <id>http://localhost:4000/posts/Dynamic-Code-Patch-with-Frida/</id>
     <content src="http://localhost:4000/posts/Dynamic-Code-Patch-with-Frida/" />
