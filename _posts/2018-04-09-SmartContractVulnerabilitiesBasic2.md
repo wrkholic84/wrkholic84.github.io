@@ -1,6 +1,16 @@
 ---
-title: "Smart Contract Vulnerabilities Basic 2"
+title: Smart Contract Vulnerabilities Basic 2
+# author: wrkholic84
 date: 2018-04-09 00:00:00 +0900
+categories: [Security, Blockchain]
+tags: [blockchain, ethereum, smartcontract]
+math: true
+mermaid: true
+# image:
+#   path: /commons/devices-mockup.png
+#   width: 800
+#   height: 500
+#   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
 
 ## 5. Forcing ether to a contract

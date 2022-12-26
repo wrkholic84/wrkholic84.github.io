@@ -1,8 +1,17 @@
 ---
-title: "ZSH Settings"
+title: ZSH Settings
+# author: wrkholic84
 date: 2020-02-14 00:00:00 +0900
+categories: [Computer, Environments]
+tags: [mac, zsh]
+math: true
+mermaid: true
+# image:
+#   path: /commons/devices-mockup.png
+#   width: 800
+#   height: 500
+#   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
-
 bash shell을 너무 오래 써오다보니, zsh로 조금 늦게 넘어오게 되었다. 난 bash가 좋은데..(익숙해서)
 
 ## Change shell to zsh

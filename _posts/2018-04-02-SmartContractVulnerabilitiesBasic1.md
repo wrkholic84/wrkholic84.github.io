@@ -1,6 +1,16 @@
 ---
-title: "Smart Contract Vulnerabilities Basic 1"
+title: Smart Contract Vulnerabilities Basic 1
+# author: wrkholic84
 date: 2018-04-02 00:00:00 +0900
+categories: [Security, Blockchain]
+tags: [blockchain, ethereum, smartcontract]
+math: true
+mermaid: true
+# image:
+#   path: /commons/devices-mockup.png
+#   width: 800
+#   height: 500
+#   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
 블록체인 기술을 이용한 시스템이 활발하게 만들어지고 있다. 자연스럽게 스마트 컨트랙트(Smart Contract)의 수요가 늘어나고 있고, 현재까지는 이더리움(Ethereum)을 이용하는 경우가 가장 많아보인다. 넥스레저(NexLedger)도 이더리움을 기반으로 하고 있다. 넥스레저 혹은 다른 이름의 블록체인 취약점 점검을 위해 이더리움 스마트 컨트랙트의 기본적인 취약점과 대응방법을 알아보자.
 

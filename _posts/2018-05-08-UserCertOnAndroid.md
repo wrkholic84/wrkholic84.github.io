@@ -1,6 +1,16 @@
 ---
-title: "Make user certificates available on Android 7.0"
+title: Make user certificates available on Android 7.0
+# author: wrkholic84
 date: 2018-05-08 00:00:00 +0900
+categories: [Security, Mobile]
+tags: [android]
+math: true
+mermaid: true
+# image:
+#   path: /commons/devices-mockup.png
+#   width: 800
+#   height: 500
+#   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
 2016년 8월 안드로이드 7.0 누가(Nougat) 버전이 배포되었다. 새로운 메모리 보호 기능이 추가되었고, APK 서명 스킴(Scheme) v2가 추가되었다. 네트워크 트래픽 보안을 위해 사용자가 직접 설치한 인증서는 더 이상 신뢰하지 않는다. API 레벨이 24 이상인 애플리케이션의 경우 해당된다.
 

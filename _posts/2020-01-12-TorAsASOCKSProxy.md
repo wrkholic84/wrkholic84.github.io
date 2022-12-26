@@ -1,6 +1,16 @@
 ---
-title: "Tor as a SOCKS Proxy"
+title: Tor as a SOCKS Proxy
+# author: wrkholic84
 date: 2020-01-12 00:00:00 +0900
+categories: [Security, Web]
+tags: [proxy]
+math: true
+mermaid: true
+# image:
+#   path: /commons/devices-mockup.png
+#   width: 800
+#   height: 500
+#   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
 요즘 웹 사이트엔 정말 다양한 보안 정책들이 적용되어 있다. 그 중 IP 차단 정책은 모의해킹을 수행할 때 있어서 매우 골칫거리가 아닐 수 없다. 
 

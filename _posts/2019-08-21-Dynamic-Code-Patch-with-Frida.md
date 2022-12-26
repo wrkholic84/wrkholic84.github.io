@@ -1,8 +1,17 @@
 ---
-title: "Dynamic Code Patch with Frida"
+title: Dynamic Code Patch with Frida
+# author: wrkholic84
 date: 2019-08-21 00:00:00 +0900
+categories: [Security, Mobile]
+tags: [frida]
+math: true
+mermaid: true
+# image:
+#   path: /commons/devices-mockup.png
+#   width: 800
+#   height: 500
+#   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
-
 모든 프로그램은 개발자가 의도한 대로 동작하게 되어있다.(당연한 이야기다.) 보안의 관점에서 프로그램을 바라볼 때, 개발자의 의도를 비틀어 다른 동작을 수행하도록 만드는 공격 방법이 있다. 개발자의 의도와 상관없이 공격자의 의도대로 프로그램이 동작한다면 그 피해는 가늠하기 어렵다. 따라서 보안 점검 시 고의로 코드가 변경되지는 않는지 확인해봐야 한다.
 
 프로그램을 변경하는 방법은 두 가지가 있다. 프로그램이 실행되지 않은 상태에서 프로그램을 변경하는 정적 코드 패치(Static Code Pathc)와 프로그램을 실행시키는 과정에서 프로그램의 코드를 변경하는 동적 코드 패치(Dynamic Code Patch)가 있다.

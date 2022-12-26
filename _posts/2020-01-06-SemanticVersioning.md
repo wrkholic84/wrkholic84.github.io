@@ -1,6 +1,16 @@
 ---
-title: "Semantic Versioning(SemVer)"
+title: Semantic Versioning(SemVer)
+# author: wrkholic84
 date: 2020-01-06 00:00:00 +0900
+categories: [Development, General]
+tags: [versioning]
+math: true
+mermaid: true
+# image:
+#   path: /commons/devices-mockup.png
+#   width: 800
+#   height: 500
+#   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
 어느 정도 규모가 있는 소프트웨어를 개발할 때면 외부 라이브러리를 사용하게된다. 그리고 자연스럽게 라이브러리 의존성 문제를 접하게 된다. 의존성 문제는 라이브러리가 버전 문제로 서로 충돌하여 사용할 수 없게 되는 것이라 이해하면 쉽다.
 

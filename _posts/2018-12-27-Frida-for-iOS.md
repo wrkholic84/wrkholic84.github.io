@@ -1,8 +1,17 @@
 ---
-title: "Frida for iOS"
+title: Frida for iOS
+# author: wrkholic84
 date: 2018-12-27 00:00:00 +0900
+categories: [Security, Mobile]
+tags: [ios, frida]
+math: true
+mermaid: true
+# image:
+#   path: /commons/devices-mockup.png
+#   width: 800
+#   height: 500
+#   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
-
 2018년 12월 iOS 버전이 12.1.2까지 배포되었다. 반면 iOS Jailbreak(탈옥)툴은 iOS 11.4 Beta3 까지 지원된다.
 (iOS 11.4 Beta3 다운그레이드 불가) 현재 iOS 11.4.1 버전에 대한 Exploit을 Ian Beer가 가지고 있는 것으로 알려져 있고 Electra를 통해 배포될 것으로 예상하고 있지만 언제 배포될지 확실하지 않다.
 새로운 버전의 iOS가 배포되면 이전 버전 iOS를 위한 Jailbreak 툴이 배포되었던 흐름에 맞추어 볼 때, 최근 iOS Jailbreak가 쉽지 않아졌음을 짐작할 수 있다. 

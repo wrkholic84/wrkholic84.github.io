@@ -1,6 +1,16 @@
 ---
-title: "How to smell out in-house coin miners"
+title: How to smell out in-house coin miners
+# author: wrkholic84
 date: 2018-03-12 00:00:00 +0900
+categories: [Security, Blockchain]
+tags: [blockchain, mining, coin]
+math: true
+mermaid: true
+# image:
+#   path: /commons/devices-mockup.png
+#   width: 800
+#   height: 500
+#   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
 대다수 일본인들은 회사에서 휴대폰을 충전하는 행위를 ‘전기를 훔치는 일’이라고 생각하여 이를 엄격히 제재한다고 한다. 다만, 일본의 경우 한국과 달리 업무용 스마트폰을 지급하는 것이 보편적이다. 암호화폐를 생각해보자. 직원이 회사의 자원을 이용하여 암호화폐 채굴(Mining)을 한다면 이는 용인될 수 있을까? 인정 문화를 공유하는 한국에서 휴대폰 충전 정도는 너그러이 넘어갈 수 있지만, 상당한 양의 전력을 필요로 하는 채굴은 이야기가 다를 것이다.
 

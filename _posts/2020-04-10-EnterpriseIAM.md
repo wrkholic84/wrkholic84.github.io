@@ -1,8 +1,17 @@
 ---
-title: "Enterprise IAM"
+title: Enterprise IAM
+# author: wrkholic84
 date: 2020-04-10 00:00:00 +0900
+categories: [Security, General]
+tags: [IAM, auth]
+math: true
+mermaid: true
+# image:
+#   path: /commons/devices-mockup.png
+#   width: 800
+#   height: 500
+#   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
-
 Identity and Access Management는 권한이 있는 사용자가 필요한 자원을 원하는 시기에 접근할 수 있게 하는 보안 원칙으로, 쉽게 생각되겠지만, 신경써야할 부분이 많다. 사용자가 누구인지 확실히 해야할 필요가 있고, 사용자의 접속 과정이 불편하진 않은지 생각해야하만 한다. 모든 보안 장치들을 통과해야만 권한을 얻을 수 있도록 만드는게 능사가 아니기 때문이다.
 
 ## Enterprise Identity and Access Management

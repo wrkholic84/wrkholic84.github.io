@@ -1,6 +1,16 @@
 ---
-title: "Authentication"
+title: Authentication
+# author: wrkholic84
 date: 2019-07-26 00:00:00 +0900
+categories: [Development, Authentication]
+tags: [auth]
+math: true
+mermaid: true
+# image:
+#   path: /commons/devices-mockup.png
+#   width: 800
+#   height: 500
+#   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
 웹 애플리케이션이나 모바일 앱에서 사용자 계정 관리를 하고 있다면 사용자 인증은 반드시 필요한 기능이다. (물론, 계정이 있는 서비스라면 종류에 상관없이 모두 인증 과정이 있어야 하는 것이 맞다.)
 
