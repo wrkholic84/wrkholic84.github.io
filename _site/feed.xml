@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>COMPRINCIPIA+</title>
   <subtitle>Computer, Programming, Hacking, etc.</subtitle>
-  <updated>2022-12-26T16:59:36+09:00</updated>
+  <updated>2022-12-26T18:09:49+09:00</updated>
   <author>
     <name>wrkholic84</name>
     <uri>http://localhost:4000/</uri>
@@ -20,145 +20,14 @@
 
   
   <entry>
-    <title>Enterprise IAM</title>
-    <link href="http://localhost:4000/posts/EnterpriseIAM/" rel="alternate" type="text/html" title="Enterprise IAM" />
-    <published>2020-04-10T00:00:00+09:00</published>
+    <title>[K8S] TroubleShooting</title>
+    <link href="http://localhost:4000/posts/TroubleShooting/" rel="alternate" type="text/html" title="[K8S] TroubleShooting" />
+    <published>2022-12-26T00:07:00+09:00</published>
   
-    <updated>2022-12-26T15:56:50+09:00</updated>
+    <updated>2022-12-26T00:07:00+09:00</updated>
   
-    <id>http://localhost:4000/posts/EnterpriseIAM/</id>
-    <content src="http://localhost:4000/posts/EnterpriseIAM/" />
-    <author>
-      <name>wrkholic84</name>
-    </author>
-
-  
-    
-    <category term="Security" />
-    
-    <category term="General" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      Identity and Access Management는 권한이 있는 사용자가 필요한 자원을 원하는 시기에 접근할 수 있게 하는 보안 원칙으로, 쉽게 생각되겠지만, 신경써야할 부분이 많다. 사용자가 누구인지 확실히 해야할 필요가 있고, 사용자의 접속 과정이 불편하진 않은지 생각해야하만 한다. 모든 보안 장치들을 통과해야만 권한을 얻을 수 있도록 만드는게 능사가 아니기 때문이다.
-
-Enterprise Identity and Access Management
-일반적인 기업의 IAM 솔루션의 구성 요소를 살펴보자.
-
-AD/LDAP
-사용자 정보 저장소가 필요하다. Active Directory를 종종 사용한다.(꼭 AD일 필요는 없다)
-Single Sign-On
-꽤 일찍부터 기업들은 Single Sign-On(...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>ZSH Settings</title>
-    <link href="http://localhost:4000/posts/ZSHSettings/" rel="alternate" type="text/html" title="ZSH Settings" />
-    <published>2020-02-14T00:00:00+09:00</published>
-  
-    <updated>2022-12-26T15:56:50+09:00</updated>
-  
-    <id>http://localhost:4000/posts/ZSHSettings/</id>
-    <content src="http://localhost:4000/posts/ZSHSettings/" />
-    <author>
-      <name>wrkholic84</name>
-    </author>
-
-  
-    
-    <category term="Computer" />
-    
-    <category term="Environments" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      bash shell을 너무 오래 써오다보니, zsh로 조금 늦게 넘어오게 되었다. 난 bash가 좋은데..(익숙해서)
-
-Change shell to zsh
-The default interactive shell is now zsh.
-To update your account to use zsh, please run `chsh -s /bin/zsh`.
-for more details, please visit https://support.apple.com/kb/HT208050.
-foo@bar:~$ chsh -s /bin/zsh
-
-
-OH MY ZSH 설치
-foo@bar:~$ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/instal...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Tor as a SOCKS Proxy</title>
-    <link href="http://localhost:4000/posts/TorAsASOCKSProxy/" rel="alternate" type="text/html" title="Tor as a SOCKS Proxy" />
-    <published>2020-01-12T00:00:00+09:00</published>
-  
-    <updated>2022-12-26T15:56:50+09:00</updated>
-  
-    <id>http://localhost:4000/posts/TorAsASOCKSProxy/</id>
-    <content src="http://localhost:4000/posts/TorAsASOCKSProxy/" />
-    <author>
-      <name>wrkholic84</name>
-    </author>
-
-  
-    
-    <category term="Security" />
-    
-    <category term="Web" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      요즘 웹 사이트엔 정말 다양한 보안 정책들이 적용되어 있다. 그 중 IP 차단 정책은 모의해킹을 수행할 때 있어서 매우 골칫거리가 아닐 수 없다.
-
-IP 차단 정책을 우회할 수 있는 방법이 몇가지 있다. 예를 들자면, VPN을 사용하면 된다. 하지만 VPN은 사실 상 유료 서비스이기 때문에 사용하는데 부담이 된다. 그 대안으로 Tor가 있다. Tor는 무료이고 HTTP를 포함한 모든 프로토콜을 사용할 수 있는 장점이 있다.
-
-Tor
-The Onion Router의 약자다. 한국에선 ‘토르’라고 부르는데 사실 ‘토어’라고 부르는게 맞다. 아무튼 Tor는 전달된 데이터를 익명으로 처리하도록 디자인된 인터넷 네트워크 프로토콜이다. Tor의 동작원리를 보면 알 수 있듯이 목적지까지 한 번에 통신하지 않고, 중...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Semantic Versioning(SemVer)</title>
-    <link href="http://localhost:4000/posts/SemanticVersioning/" rel="alternate" type="text/html" title="Semantic Versioning(SemVer)" />
-    <published>2020-01-06T00:00:00+09:00</published>
-  
-    <updated>2022-12-26T15:56:50+09:00</updated>
-  
-    <id>http://localhost:4000/posts/SemanticVersioning/</id>
-    <content src="http://localhost:4000/posts/SemanticVersioning/" />
+    <id>http://localhost:4000/posts/TroubleShooting/</id>
+    <content src="http://localhost:4000/posts/TroubleShooting/" />
     <author>
       <name>wrkholic84</name>
     </author>
@@ -167,7 +36,7 @@ The Onion Router의 약자다. 한국에선 ‘토르’라고 부르는데 사�
     
     <category term="Development" />
     
-    <category term="General" />
+    <category term="Kubernetes" />
     
   
 
@@ -179,23 +48,20 @@ The Onion Router의 약자다. 한국에선 ‘토르’라고 부르는데 사�
 
 
 
-      어느 정도 규모가 있는 소프트웨어를 개발할 때면 외부 라이브러리를 사용하게된다. 그리고 자연스럽게 라이브러리 의존성 문제를 접하게 된다. 의존성 문제는 라이브러리가 버전 문제로 서로 충돌하여 사용할 수 없게 되는 것이라 이해하면 쉽다.
+      1. CoreDNS 문제
 
-이 문제를 해결하고자 나온 라이브러리 버전 명시 규칙이 있다.
+아무리 해도 DNS Query가 안되는 상황이 발생. kube-dns 재시작하니까 됨.
 
-라이브러리의 버전은 보통 a.b.c로 표기된다.
-
-
-  첫 번째 a(Major) 버전이 오르면 기존 버전과 호환되지 않음
-  두 번째 b(Minor) 버전이 오르면 새로운 기능이 추가된 경우
-  세 번째 c(Patch) 버전이 오르면 자잘한 버그 수정이 있는 경우
+iMacPro:~$ kubectl delete pod -n kube-system -l k8s-app=kube-dns
 
 
-예를 들면,
+Verifying that DNS is working correctly within your Kubernetes platform
 
-libC 1.2.1은 새로운 버전인 libC 2.1.1과 서로 호환되지 않는 API로 구성되어 있을 것이다.
+Verify that DNS is working correctly within the Kubernetes cluster used by Component Pack for IBM Connections™.
 
-libC 1.2...
+About this task
+
+Before you install Component Pack, you must verify that DNS is...
     </summary>
   
 
@@ -203,23 +69,23 @@ libC 1.2...
 
   
   <entry>
-    <title>Dynamic Code Patch with Frida</title>
-    <link href="http://localhost:4000/posts/Dynamic-Code-Patch-with-Frida/" rel="alternate" type="text/html" title="Dynamic Code Patch with Frida" />
-    <published>2019-08-21T00:00:00+09:00</published>
+    <title>[K8S] Security</title>
+    <link href="http://localhost:4000/posts/Security/" rel="alternate" type="text/html" title="[K8S] Security" />
+    <published>2022-12-26T00:06:00+09:00</published>
   
-    <updated>2022-12-26T15:56:50+09:00</updated>
+    <updated>2022-12-26T00:06:00+09:00</updated>
   
-    <id>http://localhost:4000/posts/Dynamic-Code-Patch-with-Frida/</id>
-    <content src="http://localhost:4000/posts/Dynamic-Code-Patch-with-Frida/" />
+    <id>http://localhost:4000/posts/Security/</id>
+    <content src="http://localhost:4000/posts/Security/" />
     <author>
       <name>wrkholic84</name>
     </author>
 
   
     
-    <category term="Security" />
+    <category term="Development" />
     
-    <category term="Mobile" />
+    <category term="Kubernetes" />
     
   
 
@@ -231,11 +97,168 @@ libC 1.2...
 
 
 
-      모든 프로그램은 개발자가 의도한 대로 동작하게 되어있다.(당연한 이야기다.) 보안의 관점에서 프로그램을 바라볼 때, 개발자의 의도를 비틀어 다른 동작을 수행하도록 만드는 공격 방법이 있다. 개발자의 의도와 상관없이 공격자의 의도대로 프로그램이 동작한다면 그 피해는 가늠하기 어렵다. 따라서 보안 점검 시 고의로 코드가 변경되지는 않는지 확인해봐야 한다.
+      
 
-프로그램을 변경하는 방법은 두 가지가 있다. 프로그램이 실행되지 않은 상태에서 프로그램을 변경하는 정적 코드 패치(Static Code Pathc)와 프로그램을 실행시키는 과정에서 프로그램의 코드를 변경하는 동적 코드 패치(Dynamic Code Patch)가 있다.
+    </summary>
+  
 
-Android나 iOS는 프로그램이 만들어지기 전에 코드 서명(Code Signing...
+  </entry>
+
+  
+  <entry>
+    <title>[K8S] Database</title>
+    <link href="http://localhost:4000/posts/Database/" rel="alternate" type="text/html" title="[K8S] Database" />
+    <published>2022-12-26T00:05:00+09:00</published>
+  
+    <updated>2022-12-26T00:05:00+09:00</updated>
+  
+    <id>http://localhost:4000/posts/Database/</id>
+    <content src="http://localhost:4000/posts/Database/" />
+    <author>
+      <name>wrkholic84</name>
+    </author>
+
+  
+    
+    <category term="Development" />
+    
+    <category term="Kubernetes" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      1. PV, PVC 생성
+
+iMacPro:~$ vi domain-volume.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+  namespace: domain-dev
+spec:
+  storage...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>[K8S] Deployment, Service, Ingress</title>
+    <link href="http://localhost:4000/posts/Deployment,-Service,-Ingress/" rel="alternate" type="text/html" title="[K8S] Deployment, Service, Ingress" />
+    <published>2022-12-26T00:04:00+09:00</published>
+  
+    <updated>2022-12-26T00:04:00+09:00</updated>
+  
+    <id>http://localhost:4000/posts/Deployment,-Service,-Ingress/</id>
+    <content src="http://localhost:4000/posts/Deployment,-Service,-Ingress/" />
+    <author>
+      <name>wrkholic84</name>
+    </author>
+
+  
+    
+    <category term="Development" />
+    
+    <category term="Kubernetes" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      1. Namespace 생성
+
+필요한 Namespace 를 생성
+
+iMacPro:~$ k create ns domain-dev
+iMacPro:~$ k create ns domain-prod
+
+
+2. Deployment 생성
+
+Container Repository 에서 이미지를 가져와 Demployment 생성
+
+iMacPro:~$ k -n domain-dev create deploy domain-web --image=??? --port 8080 --replicas 2
+iMacPro:~$ k -n domain-dev create deploy domain-api --image=??? --port 8080 --replicas 2
+
+
+3. Service 생성
+
+iMacPro:~$ k -n domain-dev ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>[K8S] Cluster Setup</title>
+    <link href="http://localhost:4000/posts/Cluster-Setup/" rel="alternate" type="text/html" title="[K8S] Cluster Setup" />
+    <published>2022-12-26T00:03:00+09:00</published>
+  
+    <updated>2022-12-26T00:03:00+09:00</updated>
+  
+    <id>http://localhost:4000/posts/Cluster-Setup/</id>
+    <content src="http://localhost:4000/posts/Cluster-Setup/" />
+    <author>
+      <name>wrkholic84</name>
+    </author>
+
+  
+    
+    <category term="Development" />
+    
+    <category term="Kubernetes" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      1. 운영자 PC에 클러스터 설정
+
+1.1. kubectl 설치 (Mac 기준)
+
+iMacPro:~$ brew install kubectl
+
+
+1.2. Master 노드에 개발용 인증서 생성 (optional)
+
+ubuntu@master:/etc/kubernetes/pki$ sudo openssl genrsa -out domain.com.ca.key 2048
+ubuntu@master:/etc/kubernetes/pki$ sudo openssl req -x509 -new -nodes -key ./domain.com.ca.key -subj "/CN=domain.com" -addext "subjectAltName = DNS:domain.com,DNS:domain.com.default,DNS:domain.co...
     </summary>
   
 
