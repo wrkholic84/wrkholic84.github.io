@@ -122,6 +122,16 @@
   <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6628014577409434" crossorigin="anonymous"></script>
 
+  <!-- Google Analytics -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-56RFXPQD4D"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-56RFXPQD4D');
+  </script>
 </head>
 
 
@@ -900,6 +910,72 @@ root@ip:~# vi /etc/hosts
 
   <div class="post-preview">
     <h1>
+      <a href="/posts/Warp-Starship-with-zsh/">Warp Starship with zsh</a>
+    </h1>
+
+    <div class="post-content">
+      <p>
+        
+
+
+
+
+
+        1. Install Starship Terminal
+
+brew를 통해 starship terminal을 설치한다.
+
+brew install starship
+
+
+1.1. starship terminal을 사용하기 위해서는 Nerd Font를 사용해야 한다. https://www.nerdfonts.com/font-downloads 에서 적당한 폰트를 골라...
+      </p>
+    </div>
+
+    <div class="post-meta text-muted d-flex">
+      <div class="mr-auto">
+
+        <!-- posted date -->
+        <i class="far fa-calendar fa-fw"></i>
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+
+<em class=""
+    data-ts="1668956400"
+    data-df="ll"
+    >
+  Nov 21, 2022
+</em>
+
+
+        <!-- categories -->
+        
+          <i class="far fa-folder-open fa-fw"></i>
+          <span>
+          
+            Computer,
+            Environments
+          </span>
+        
+
+      </div>
+
+      
+
+    </div> <!-- .post-meta -->
+
+  </div> <!-- .post-review -->
+
+
+
+  <div class="post-preview">
+    <h1>
       <a href="/posts/EnterpriseIAM/">Enterprise IAM</a>
     </h1>
 
@@ -944,70 +1020,6 @@ root@ip:~# vi /etc/hosts
           
             Security,
             General
-          </span>
-        
-
-      </div>
-
-      
-
-    </div> <!-- .post-meta -->
-
-  </div> <!-- .post-review -->
-
-
-
-  <div class="post-preview">
-    <h1>
-      <a href="/posts/ZSHSettings/">ZSH Settings</a>
-    </h1>
-
-    <div class="post-content">
-      <p>
-        
-
-
-
-
-
-        bash shell을 너무 오래 써오다보니, zsh로 조금 늦게 넘어오게 되었다. 난 bash가 좋은데..(익숙해서)
-
-Change shell to zsh
-The default interactive shell is now zsh.
-To update your account to use zsh, please run `chsh -s /bin/zsh`.
-fo...
-      </p>
-    </div>
-
-    <div class="post-meta text-muted d-flex">
-      <div class="mr-auto">
-
-        <!-- posted date -->
-        <i class="far fa-calendar fa-fw"></i>
-        <!--
-  Date format snippet
-  See: ${JS_ROOT}/utils/locale-dateime.js
--->
-
-
-
-
-
-<em class=""
-    data-ts="1581606000"
-    data-df="ll"
-    >
-  Feb 14, 2020
-</em>
-
-
-        <!-- categories -->
-        
-          <i class="far fa-folder-open fa-fw"></i>
-          <span>
-          
-            Computer,
-            Environments
           </span>
         
 
@@ -1078,10 +1090,27 @@ fo...
 
   
 
+    
+    
+    
+    
+    
+
+    
+
+    
+      <!-- show number -->
+      <li class="page-item ">
+        <a class="page-link btn-box-shadow" href="/page3">3</a>
+      </li>
+    
+
+  
+
   <!-- mobile pagination -->
   <li class="page-index align-middle">
     <span>1</span>
-    <span class="text-muted">/ 2</span>
+    <span class="text-muted">/ 3</span>
   </li>
 
   <!-- right arrow -->
@@ -1131,11 +1160,6 @@ fo...
         
         
         
-      <li><a href="/posts/ZSHSettings/">ZSH Settings</a></li>
-      
-        
-        
-        
       <li><a href="/posts/EnterpriseIAM/">Enterprise IAM</a></li>
       
         
@@ -1152,6 +1176,11 @@ fo...
         
         
       <li><a href="/posts/SmartContractVulnerabilitiesBasic2/">Smart Contract Vulnerabilities Basic 2</a></li>
+      
+        
+        
+        
+      <li><a href="/posts/UserCertOnAndroid/">Make user certificates available on Android 7.0</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1460,6 +1489,68 @@ fo...
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1499,70 +1590,120 @@ fo...
     
     
     
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
 
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1598,16 +1739,16 @@ fo...
       <a class="post-tag" href="/tags/frida/">frida</a>
     
       
+      <a class="post-tag" href="/tags/mac/">mac</a>
+    
+      
       <a class="post-tag" href="/tags/smartcontract/">smartcontract</a>
     
       
+      <a class="post-tag" href="/tags/zsh/">zsh</a>
+    
+      
       <a class="post-tag" href="/tags/android/">android</a>
-    
-      
-      <a class="post-tag" href="/tags/coin/">coin</a>
-    
-      
-      <a class="post-tag" href="/tags/iam/">IAM</a>
     
 
     </div>
@@ -1934,6 +2075,68 @@ fo...
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1973,70 +2176,120 @@ fo...
     
     
     
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
 
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
-      
-    
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2072,16 +2325,16 @@ fo...
       <a class="post-tag" href="/tags/frida/">frida</a>
     
       
+      <a class="post-tag" href="/tags/mac/">mac</a>
+    
+      
       <a class="post-tag" href="/tags/smartcontract/">smartcontract</a>
     
       
+      <a class="post-tag" href="/tags/zsh/">zsh</a>
+    
+      
       <a class="post-tag" href="/tags/android/">android</a>
-    
-      
-      <a class="post-tag" href="/tags/coin/">coin</a>
-    
-      
-      <a class="post-tag" href="/tags/iam/">IAM</a>
     
 
     </div>
