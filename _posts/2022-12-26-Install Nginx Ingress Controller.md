@@ -19,7 +19,7 @@ Nginx 기반 Ingress Controller는 다양한 종류가 있는데 대표적으로
 
 우리는 첫번째 Ingress Controller를 사용한다. (Kubernetes Docs 기준)
 
-## 1. Nginx Ingress Controller 설치
+## Nginx Ingress Controller 설치
 
 설치 후에 Ingress Controller의 validatingwebhookconfigurations을 삭제. 2020년 3월 업데이트 후 생긴건데, 인증 관련 보안업데이트로 생긴 것으로 보임. 삭제 후 진행.
 
@@ -28,7 +28,7 @@ ubuntu@master:~$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/i
 ubuntu@master:~$ kubectl delete validatingwebhookconfigurations.admissionregistration.k8s.io ingress-nginx-admission
 ```
 
-## 2. Nginx Ingress Controller 테스트
+## Nginx Ingress Controller 테스트
 
 2.1. 테스트를 위한 Namespace 생성
 
@@ -95,6 +95,6 @@ ubuntu@master:~$ curl http://172.31.20.49:31280/test
 You've hit demo-web-69d8dc7db6-lppch  # 잘됨
 ```
 
-## 3. AWS ALB 설정
+## AWS ALB 설정
 
 3.1. AWS에서 로드밸런서의 대상그룹에 Worker Node 로 사용되는 EC2 등록. 포트는 31280.

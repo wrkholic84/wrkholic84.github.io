@@ -12,7 +12,7 @@ mermaid: true
 #   height: 500
 #   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
-## 1. Install Starship Terminal
+## Install Starship Terminal
 
 brew를 통해 starship terminal을 설치한다.
 
@@ -28,7 +28,7 @@ brew install starship
 
 [https://raw.githubusercontent.com/ChristianLempa/dotfiles/main/.config/starship.toml](https://raw.githubusercontent.com/ChristianLempa/dotfiles/main/.config/starship.toml) 참조
 
-```yaml
+```shell
 # ~/.config/starship.toml
 
 # Inserts a blank line between shell prompts
@@ -142,7 +142,7 @@ disabled = true
 
 1.3. 프롬프트를 예쁘게 표시하기 위해 홈디렉터리 밑 다음 경로(.zsh/starship.zsh)에 아래 내용으로 파일을 만들어 준다. [https://raw.githubusercontent.com/ChristianLempa/dotfiles/main/.zsh/starship.zsh](https://raw.githubusercontent.com/ChristianLempa/dotfiles/main/.zsh/starship.zsh) 참조
 
-```yaml
+```shell
 # find out which distribution we are running on
 LFILE="/etc/*-release"
 MFILE="/System/Library/CoreServices/SystemVersion.plist"
@@ -185,12 +185,12 @@ export STARSHIP_DISTRO="$ICON"
 
 그리고 아래 내용을 .zshrc 의 맨 밑에 넣어준다.
 
-```yaml
+```shell
 [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
 eval "$(starship init zsh)"
 ```
 
-## 2. Install Warp
+## Install Warp
 
 brew를 통해 warp를 설치한다.
 
@@ -200,7 +200,7 @@ brew install warp
 
 warp 앱을 실행시키면 계정을 필요로 한다. 적당한 이메일로 가입
 
-## 3. Set Warp Preferences
+## Set Warp Preferences
 
 3.1. 터미널 줄 간격 줄이기
 
@@ -218,7 +218,7 @@ Open Completions Menu as you type : On
 
 Appearnce > Text > Terminal font : Hack Nerd Font
 
-## 4. Set Font on Terminals
+## Set Font on Terminals
 
 터미널을 사용하는 여러 프로그램에 앞서 설치한 Hack Nerd Font를 기본 폰트로 설정해준다.
 
@@ -228,6 +228,6 @@ Command + , 로 VSCode 설정파일을 열고 font 를 검색.
 
 Edit in settings.json 을 열어서, 아래 내용을 추가한다.
 
-```yaml
+```json
 "terminal.integrated.fontFamily": "'Hack Nerd Font'",
 ```

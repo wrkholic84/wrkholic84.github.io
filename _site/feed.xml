@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>COMPRINCIPIA+</title>
   <subtitle>Computer, Programming, Hacking, etc.</subtitle>
-  <updated>2022-12-29T13:47:49+09:00</updated>
+  <updated>2022-12-30T15:07:51+09:00</updated>
   <author>
     <name>wrkholic84</name>
     <uri>http://localhost:4000/</uri>
@@ -48,7 +48,7 @@
 
 
 
-      1. CoreDNS 문제
+      CoreDNS 문제
 
 아무리 해도 DNS Query가 안되는 상황이 발생. kube-dns 재시작하니까 됨.
 
@@ -61,7 +61,7 @@ Verify that DNS is working correctly within the Kubernetes cluster used by Compo
 
 About this task
 
-Before you install Component Pack, you must verify that DNS is...
+Before you install Component Pack, you must verify that DNS is wo...
     </summary>
   
 
@@ -134,7 +134,7 @@ Before you install Component Pack, you must verify that DNS is...
 
 
 
-      1. PV, PVC 생성
+      PV, PVC 생성
 
 iMacPro:~$ vi domain-volume.yaml
 apiVersion: v1
@@ -158,7 +158,7 @@ metadata:
   name: mysql-pv-claim
   namespace: domain-dev
 spec:
-  storage...
+  storageCla...
     </summary>
   
 
@@ -194,7 +194,7 @@ spec:
 
 
 
-      1. Namespace 생성
+      Namespace 생성
 
 필요한 Namespace 를 생성
 
@@ -202,7 +202,7 @@ iMacPro:~$ k create ns domain-dev
 iMacPro:~$ k create ns domain-prod
 
 
-2. Deployment 생성
+Deployment 생성
 
 Container Repository 에서 이미지를 가져와 Demployment 생성
 
@@ -210,9 +210,9 @@ iMacPro:~$ k -n domain-dev create deploy domain-web --image=??? --port 8080 --re
 iMacPro:~$ k -n domain-dev create deploy domain-api --image=??? --port 8080 --replicas 2
 
 
-3. Service 생성
+Service 생성
 
-iMacPro:~$ k -n domain-dev ...
+iMacPro:~$ k -n domain-dev expose de...
     </summary>
   
 
@@ -248,7 +248,7 @@ iMacPro:~$ k -n domain-dev ...
 
 
 
-      1. 운영자 PC에 클러스터 설정
+      운영자 PC에 클러스터 설정
 
 1.1. kubectl 설치 (Mac 기준)
 
@@ -258,7 +258,7 @@ iMacPro:~$ brew install kubectl
 1.2. Master 노드에 개발용 인증서 생성 (optional)
 
 ubuntu@master:/etc/kubernetes/pki$ sudo openssl genrsa -out domain.com.ca.key 2048
-ubuntu@master:/etc/kubernetes/pki$ sudo openssl req -x509 -new -nodes -key ./domain.com.ca.key -subj "/CN=domain.com" -addext "subjectAltName = DNS:domain.com,DNS:domain.com.default,DNS:domain.co...
+ubuntu@master:/etc/kubernetes/pki$ sudo openssl req -x509 -new -nodes -key ./domain.com.ca.key -subj "/CN=domain.com" -addext "subjectAltName = DNS:domain.com,DNS:domain.com.default,DNS:domain.com.d...
     </summary>
   
 

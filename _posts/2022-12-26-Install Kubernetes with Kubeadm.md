@@ -12,7 +12,7 @@ mermaid: true
 #   height: 500
 #   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
-## 1. Production 환경 구성
+## Production 환경 구성
 
 1.1. 노드간 원활한 통신을 위한 hostname 설정 (Master; worker 별도 설정 필요)
 
@@ -57,7 +57,7 @@ EOF
 root@master:~# sysctl --system
 ```
 
-## 2. Container Runtime 설치
+## Container Runtime 설치
 
 2.1. Docker 엔진 설치 (Master, Worker)
 
@@ -105,7 +105,7 @@ root@master:~# sudo apt-get install -y kubelet kubeadm kubectl
 root@master:~# sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
-## 4. 클러스터 생성
+## 클러스터 생성
 
 4.1. Kubeadm을 이용한 Cluster 생성 (Master)
 
@@ -120,7 +120,7 @@ NAME     STATUS     ROLES           AGE   VERSION
 master   **NotReady**   control-plane   15m   v1.25.3
 ```
 
-## 5. CNI - Calico 설치
+## CNI - Calico 설치
 
 5.1. Calico 설치 (참조 : [https://projectcalico.docs.tigera.io/getting-started/kubernetes/quickstart](https://projectcalico.docs.tigera.io/getting-started/kubernetes/quickstart))
 
@@ -132,7 +132,7 @@ NAME     STATUS   ROLES           AGE   VERSION
 master   **Ready**    control-plane   17m   v1.25.3
 ```
 
-## 6. Calico 라우팅 설정
+## Calico 라우팅 설정
 
 6.1. calicoctl 설치
 
@@ -168,7 +168,7 @@ spec:
 root@master:~# calicoctl apply -f ./mycni.yaml
 ```
 
-## 7. Worker Node 연결
+## Worker Node 연결
 
 7.1. Master Node에 Worker Node 연결
 

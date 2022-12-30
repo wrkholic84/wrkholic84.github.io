@@ -12,13 +12,13 @@ mermaid: true
 #   height: 500
 #   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
-## 1. Deploy Kubernetes Dashboard UI
+## Deploy Kubernetes Dashboard UI
 
 ```bash
 ubuntu@master:~$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
 ```
 
-## 2. Deployment 변경
+## Deployment 변경
 
 dashboard는 http 기반으로 동작하며, 로그인 없이 접속 가능하도록 설정.
 
@@ -47,7 +47,7 @@ spec:
         protocol: TCP
 ```
 
-## 3. Service 변경
+## Service 변경
 
 ```yaml
 spec:
@@ -63,7 +63,7 @@ spec:
     k8s-app: kubernetes-dashboard
 ```
 
-## 4. Ingress 등록
+## Ingress 등록
 
 ```yaml
 ubuntu@master:~$
@@ -90,11 +90,11 @@ spec:
               number: 9090
 ```
 
-## 5. RBAC 설정
+## RBAC 설정
 
 Dashboard의 ServiceAccount는 클러스터 리소스 접근권한이 없기때문에, Cluster Role의 ‘cluster-admin’ 권한을 바인딩
 
-```bash
+```shell
 # Cluster Role 확인
 ubuntu@master:~$ k get clusterrole | grep admin
 admin                                                                  2022-11-07T02:03:19Z
@@ -118,7 +118,7 @@ default                0         18m
 ubuntu@master:~$ k create clusterrolebinding kubernetes-dashboard-cluster-admin --serviceaccount kubernetes-dashboard:kubernetes-dashboard --clusterrole cluster-admin
 ```
 
-## 6. RBAC 설정 2
+## RBAC 설정 2
 
 kubernetes-dashboard에 사용자(ServiceAccount)를 추가하여 이 사용자의 토큰으로 dashboard에 로그인
 

@@ -12,7 +12,7 @@ mermaid: true
 #   height: 500
 #   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
-## 1. CoreDNS 문제
+## CoreDNS 문제
 
 아무리 해도 DNS Query가 안되는 상황이 발생. kube-dns 재시작하니까 됨.
 
@@ -34,7 +34,7 @@ Before you install Component Pack, you must verify that DNS is working correctly
 
 1. On the Kubernetes master (if you used an HA deployment, select the primary master), set up a test environment by running the following command:
     
-    ```
+    ```shell
     kubectl create -f https://k8s.io/examples/admin/dns/busybox.yaml
     ```
     
@@ -48,7 +48,7 @@ Before you install Component Pack, you must verify that DNS is working correctly
     
 3. Verify that DNS is working correctly by running the following command:
     
-    ```
+    ```shell
     kubectl exec -ti busybox -- nslookup kubernetes.default
     ```
     
@@ -60,13 +60,13 @@ Before you install Component Pack, you must verify that DNS is working correctly
     
     If the nslookup command fails, execute the following command on all Kubernetes nodes in your cluster (including all masters and worker nodes):
     
-    ```
+    ```shell
     iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
     ```
     
     Then repeat step 3 to verify that the DNS is now working correctly. If DNS problems persist, recreate the core-dns pods on the Kubernetes master by running the following command (in an HA deployment, execute this command on the primary Kubernetes master):
     
-    ```
+    ```shell
     kubectl delete pod -n kube-system -l k8s-app=kube-dns
     ```
     
@@ -76,7 +76,7 @@ Before you install Component Pack, you must verify that DNS is working correctly
     
 5. When the DNS is working correctly, delete the test environment by running the following command:
     
-    ```
+    ```shell
     kubectl delete -f https://k8s.io/examples/admin/dns/busybox.yaml
     ```
     

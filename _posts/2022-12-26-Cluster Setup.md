@@ -12,7 +12,7 @@ mermaid: true
 #   height: 500
 #   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
-## 1. 운영자 PC에 클러스터 설정
+## 운영자 PC에 클러스터 설정
 
 1.1. kubectl 설치 (Mac 기준)
 
@@ -43,7 +43,7 @@ Master 노드에서 apiserver.crt(/etc/kubernetes/pki/)를 다운로드 받은 �
 
 클러스터를 등록하면서 사용한 인증서(crt) 파일은 kubernetes를 호스트로 요청 시에만 사용할 수 있다.
 
-```jsx
+```shell
 iMacPro:~$ openssl x509 -in ./apiserver.crt -noout -text
 Certificate:
     Data:
@@ -61,7 +61,7 @@ Certificate:
 
 별도로 인증서를 바꾸지 않고, 기본적으로 생성된 인증서(apiserver.crt)를 사용할 경우 아래와 같이 운영자 PC의 호스트 파일에 kubernetes를 아래와 같이 등록하여 사용하면 된다.
 
-```jsx
+```shell
 /etc/hosts
 ...
 13.206.22.22  kubernetes
@@ -70,11 +70,11 @@ Certificate:
 
 1.5. 운영자 PC에 클러스터 등록
 
-```jsx
+```shell
 iMacPro:~$ k config set-cluster domain.com --server https://kubernetes:6443 --embed-certs --certificate-authority=./apiserver.crt
 ```
 
-## 2. 개발자(운영) 계정 추가
+## 개발자(운영) 계정 추가
 
 운영자 계정으로, Dev,Stg,Prod Namespace에서 동시에 사용할 예정
 
@@ -168,7 +168,7 @@ users:
     client-key-data: REDACTED**
 ```
 
-## 3. 개발자(운영) 계정 RBAC 추가
+## 개발자(운영) 계정 RBAC 추가
 
 3.1. 개발자(운영)에게 필요한 role 확인
 

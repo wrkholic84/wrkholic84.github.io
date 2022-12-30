@@ -382,14 +382,14 @@
 
 
 
-        1. CoreDNS 문제
+        CoreDNS 문제
 
 아무리 해도 DNS Query가 안되는 상황이 발생. kube-dns 재시작하니까 됨.
 
 iMacPro:~$ kubectl delete pod -n kube-system -l k8s-app=kube-dns
 
 
-Verifying that DNS is working correctly within your Kubernetes pl...
+Verifying that DNS is working correctly within your Kubernetes platf...
       </p>
     </div>
 
@@ -508,7 +508,7 @@ Verifying that DNS is working correctly within your Kubernetes pl...
 
 
 
-        1. PV, PVC 생성
+        PV, PVC 생성
 
 iMacPro:~$ vi domain-volume.yaml
 apiVersion: v1
@@ -520,7 +520,7 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    st...
+    stora...
       </p>
     </div>
 
@@ -579,7 +579,7 @@ spec:
 
 
 
-        1. Namespace 생성
+        Namespace 생성
 
 필요한 Namespace 를 생성
 
@@ -587,11 +587,11 @@ iMacPro:~$ k create ns domain-dev
 iMacPro:~$ k create ns domain-prod
 
 
-2. Deployment 생성
+Deployment 생성
 
 Container Repository 에서 이미지를 가져와 Demployment 생성
 
-iMacPro:~$ k -n domain...
+iMacPro:~$ k -n domain-dev c...
       </p>
     </div>
 
@@ -650,7 +650,7 @@ iMacPro:~$ k -n domain...
 
 
 
-        1. 운영자 PC에 클러스터 설정
+        운영자 PC에 클러스터 설정
 
 1.1. kubectl 설치 (Mac 기준)
 
@@ -659,7 +659,7 @@ iMacPro:~$ brew install kubectl
 
 1.2. Master 노드에 개발용 인증서 생성 (optional)
 
-ubuntu@master:/etc/kubernetes/pki$ sudo openssl genrsa -out domain.com.ca.key ...
+ubuntu@master:/etc/kubernetes/pki$ sudo openssl genrsa -out domain.com.ca.key 204...
       </p>
     </div>
 
@@ -718,14 +718,14 @@ ubuntu@master:/etc/kubernetes/pki$ sudo openssl genrsa -out domain.com.ca.key ..
 
 
 
-        1. Deploy Kubernetes Dashboard UI
+        Deploy Kubernetes Dashboard UI
 
 ubuntu@master:~$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
 
 
-2. Deployment 변경
+Deployment 변경
 
-dashboard는 http 기반...
+dashboard는 http 기반으로 동작하...
       </p>
     </div>
 
@@ -793,7 +793,7 @@ dashboard는 http 기반...
 
 우리는 첫번째 Ingress Controller를 사용한다. (Kubernetes Docs 기준)
 
-1. Nginx Ingress Cont...
+Nginx Ingress Control...
       </p>
     </div>
 
@@ -852,7 +852,7 @@ dashboard는 http 기반...
 
 
 
-        1. Production 환경 구성
+        Production 환경 구성
 
 1.1. 노드간 원활한 통신을 위한 hostname 설정 (Master; worker 별도 설정 필요)
 
@@ -862,7 +862,7 @@ root@ip:~# hostnamectl set-hostname master
 1.2. Host 파일 설정 (Master; worker 별도 설정 필요)
 
 root@ip:~# vi /etc/hosts
-127....
+127.0.0...
       </p>
     </div>
 
@@ -921,14 +921,14 @@ root@ip:~# vi /etc/hosts
 
 
 
-        1. Install Starship Terminal
+        Install Starship Terminal
 
 brew를 통해 starship terminal을 설치한다.
 
 brew install starship
 
 
-1.1. starship terminal을 사용하기 위해서는 Nerd Font를 사용해야 한다. https://www.nerdfonts.com/font-downloads 에서 적당한 폰트를 골라...
+1.1. starship terminal을 사용하기 위해서는 Nerd Font를 사용해야 한다. https://www.nerdfonts.com/font-downloads 에서 적당한 폰트를 골라 설치...
       </p>
     </div>
 
