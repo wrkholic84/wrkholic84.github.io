@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>COMPRINCIPIA+</title>
   <subtitle>Computer, Programming, Hacking, etc.</subtitle>
-  <updated>2022-12-30T15:07:51+09:00</updated>
+  <updated>2023-01-10T16:41:54+09:00</updated>
   <author>
     <name>wrkholic84</name>
     <uri>http://localhost:4000/</uri>
@@ -13,7 +13,7 @@
   <link rel="alternate" type="text/html" hreflang="en"
     href="http://localhost:4000/"/>
   <generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator>
-  <rights> © 2022 wrkholic84 </rights>
+  <rights> © 2023 wrkholic84 </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
@@ -24,7 +24,7 @@
     <link href="http://localhost:4000/posts/TroubleShooting/" rel="alternate" type="text/html" title="[K8S] TroubleShooting" />
     <published>2022-12-26T00:07:00+09:00</published>
   
-    <updated>2022-12-26T00:07:00+09:00</updated>
+    <updated>2022-12-30T15:09:15+09:00</updated>
   
     <id>http://localhost:4000/posts/TroubleShooting/</id>
     <content src="http://localhost:4000/posts/TroubleShooting/" />
@@ -110,7 +110,7 @@ Before you install Component Pack, you must verify that DNS is wo...
     <link href="http://localhost:4000/posts/Database/" rel="alternate" type="text/html" title="[K8S] Database" />
     <published>2022-12-26T00:05:00+09:00</published>
   
-    <updated>2022-12-26T00:05:00+09:00</updated>
+    <updated>2022-12-30T15:09:15+09:00</updated>
   
     <id>http://localhost:4000/posts/Database/</id>
     <content src="http://localhost:4000/posts/Database/" />
@@ -170,7 +170,7 @@ spec:
     <link href="http://localhost:4000/posts/Deployment,-Service,-Ingress/" rel="alternate" type="text/html" title="[K8S] Deployment, Service, Ingress" />
     <published>2022-12-26T00:04:00+09:00</published>
   
-    <updated>2022-12-26T00:04:00+09:00</updated>
+    <updated>2022-12-30T15:09:15+09:00</updated>
   
     <id>http://localhost:4000/posts/Deployment,-Service,-Ingress/</id>
     <content src="http://localhost:4000/posts/Deployment,-Service,-Ingress/" />
@@ -224,7 +224,7 @@ iMacPro:~$ k -n domain-dev expose de...
     <link href="http://localhost:4000/posts/Cluster-Setup/" rel="alternate" type="text/html" title="[K8S] Cluster Setup" />
     <published>2022-12-26T00:03:00+09:00</published>
   
-    <updated>2022-12-26T00:03:00+09:00</updated>
+    <updated>2022-12-30T15:09:15+09:00</updated>
   
     <id>http://localhost:4000/posts/Cluster-Setup/</id>
     <content src="http://localhost:4000/posts/Cluster-Setup/" />
