@@ -1,5 +1,5 @@
 ---
-title: "AWS IAM 사용자의 MFA 설정을 위해 필요한 권한"
+title: "AWS IAM 사용자의 MFA 설정을 위해 필요한 정책"
 # author: wrkholic84
 date: 2023-02-07 00:00:00 +0900
 categories: [Cloud, AWS]
