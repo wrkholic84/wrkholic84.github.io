@@ -47,3 +47,8 @@ nvme1n1 볼륨이 확인되었으니, 파일 시스템 유형을 확인해본다
 ```bash
 [ec2-user@ip-0-0-0-0 ~]$ sudo mkfs -t xfs /dev/nvme1n1
 ```
+그리고 다시 파일 시스템 유형을 확인해보면, 아래와 같이 바뀌어 표시된다.
+```bash
+[ec2-user@ip-0-0-0-0 ~]$ sudo file -s /dev/nvme1n1
+/dev/nvme1n1: SGI XFS filesystem data (...)
+```
