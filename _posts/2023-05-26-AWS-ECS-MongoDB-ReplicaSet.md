@@ -78,3 +78,13 @@ nvme1n1       259:3    0  30G  0 disk /mnt/data
 [ec2-user@ip-0-0-0-0 mongodb]$ openssl rand -base64 756 > ./mongodb.key
 [ec2-user@ip-0-0-0-0 mongodb]$ chmod 400 ./mongodb.key
 ```
+
+### 4. 작업 정의
+ECS에서 사용할 작업을 만들어준다.
+이 작업에는 
+* 총 3개의 MongoDB 컨테이너가 동작하며,
+* 앞서 마운트한 볼륨을 컨테이너가 공유하여 사용한다
+* 각각의 DB 컨테이너는 앞에서 생성한 3개 디렉토리를 각자의 역할에 맞추어 데이터 디렉토리로 사용하며,
+* Replica Set 인증키를 공유하여 Replica Set의 구성원이 된다
+* DB 접속을 위한 계정을 만든다
+* 클라우드 와치에 연결하여 로그를 수집한다.
