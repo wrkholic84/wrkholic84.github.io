@@ -38,3 +38,9 @@ nvme0n1       259:0    0  30G  0 disk
 └─nvme0n1p128 259:2    0   1M  0 part 
 nvme1n1       259:3    0  30G  0 disk 
 ```
+nvme1n1 볼륨이 확인되었으니, 파일 시스템 유형을 확인해본다. data라고만 표시되면 파일 시스템이 없는 것이다.
+```bash
+[ec2-user@ip-0-0-0-0 ~]$ sudo file -s /dev/nvme1n1
+/dev/nvme1n1: data
+```
+다음으로 볼륨에 파일 시스템을 생성해본다. 데이터베이스로 사용할 볼륨이라, xfs 포멧으로 생성한다.
