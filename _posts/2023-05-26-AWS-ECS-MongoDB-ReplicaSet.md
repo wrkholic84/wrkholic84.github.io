@@ -65,3 +65,16 @@ nvme0n1       259:0    0  30G  0 disk
 └─nvme0n1p128 259:2    0   1M  0 part 
 nvme1n1       259:3    0  30G  0 disk /mnt/data
 ```
+
+### 3. MongoDB Replica Set에서 사용할 디렉토리 및 파일 생성
+위 그림과 같이 3개 DB를 운영하기 위한 데이터 디렉토리 3개와 Replica Set 인증키 파일 1개를 방금 마운트 한 볼륨에 생성해준다.
+```bash
+[ec2-user@ip-0-0-0-0 data]$ cd mongodb
+[ec2-user@ip-0-0-0-0 mongodb]$ pwd
+/mnt/data/mongodb
+[ec2-user@ip-0-0-0-0 mongodb]$ mkdir primary
+[ec2-user@ip-0-0-0-0 mongodb]$ mkdir secondary
+[ec2-user@ip-0-0-0-0 mongodb]$ mkdir arbiter
+[ec2-user@ip-0-0-0-0 mongodb]$ openssl rand -base64 756 > ./mongodb.key
+[ec2-user@ip-0-0-0-0 mongodb]$ chmod 400 ./mongodb.key
+```
