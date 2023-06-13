@@ -30,3 +30,11 @@ EC2 내부적으로 표시되는 이름은 /dev/xvdf ~ /dev/xvdp 로 바뀐다.
 ECS 인스턴스에서 (논리적으로)연결된 볼륨을 마운트한다.
 먼저, lsblk 명령으로 사용 가능한 디스크 디바이스 및 마운트 포인트를 확인
 Nitro 시스템 기반 인스턴스의 경우 아래와 같이 NVMe 블록 디바이스로 표시되고, 그 외(T2인스턴스 등)의 경우 /dev/xvda 등으로 표시된다.
+```bash
+[ec2-user@ip-0-0-0-0 ~]$ lsblk
+NAME          MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+nvme0n1       259:0    0  30G  0 disk 
+├─nvme0n1p1   259:1    0  30G  0 part /
+└─nvme0n1p128 259:2    0   1M  0 part 
+nvme1n1       259:3    0  30G  0 disk 
+```
