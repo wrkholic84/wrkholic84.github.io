@@ -89,4 +89,40 @@ ECS에서 사용할 작업을 만들어준다.
 * DB 접속을 위한 계정을 만든다
 * 클라우드 와치에 연결하여 로그를 수집한다.
 
-<작업 정의 생성>  
+#### 작업 정의 생성  
+네트워크 모드 : default  
+호환성 요구 : EC2  
+볼륨추가  
+#1.   
+이름 : mongodb-arbiter  
+볼륨 유형 : Bind Mount  
+소스 경로 : /mnt/data/mongodb/arbiter  
+#2.  
+이름 : mongodb-primary  
+볼륨 유형 : Bind Mount  
+소스 경로 : /mnt/data/mongodb/primary  
+#3.  
+이름 : mongodb-secondary  
+볼륨 유형 : Bind Mount  
+소스 경로 : /mnt/data/mongodb/secondary  
+#4.  
+이름 : mongodb-replica-key  
+볼륨 유형 : Bind Mount  
+소스 경로 : /mnt/data/mongodb/mongodb.key  
+  
+--> 컨테이너 정의  
+#1.  
+컨테이너 이름 : mongodb-primary  
+이미지 : mongo:latest  
+하드제한 : 512MB  
+포트 매핑 : 27017 / 27017 / tcp  
+환경>   
+명령 :   
+--replSet,< Replica Set Name >,--keyFile,/etc/mongodb.key,--bind_ip_all,--auth
+환경변수 :   
+MONGO_INITDB_ROOT_PASSWORD / < DB비밀번호 >
+MONGO_INITDB_ROOT_USERNAME / < DB아이디 >  
+스토리지 및 로깅>  
+탑재지점>  
+#1. mongodb-primary > /data/db  
+#2. mongodb-replica-key > /etc/mongodb.key  
