@@ -52,3 +52,16 @@ nvme1n1 볼륨이 확인되었으니, 파일 시스템 유형을 확인해본다
 [ec2-user@ip-0-0-0-0 ~]$ sudo file -s /dev/nvme1n1
 /dev/nvme1n1: SGI XFS filesystem data (...)
 ```
+이제 원하는 경로에 볼륨을 마운트 한다.
+```bash
+[ec2-user@ip-0-0-0-0 ~]$ sudo mount /dev/nvme1n1 /mnt/data
+```
+그리고 다시 블록 디바이스 정보를 확인하면 아래와 같이 /mnt/data 에 마운트 된 것을 알 수 있다.
+```bash
+[ec2-user@ip-0-0-0-0 ~]$ lsblk
+NAME          MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+nvme0n1       259:0    0  30G  0 disk 
+├─nvme0n1p1   259:1    0  30G  0 part /
+└─nvme0n1p128 259:2    0   1M  0 part 
+nvme1n1       259:3    0  30G  0 disk /mnt/data
+```
