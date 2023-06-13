@@ -6,7 +6,6 @@ categories: [Cloud, AWS, MongoDB, ReplicaSet]
 tags: [AWS, ECS, DB]
 math: true
 mermaid: true
-published: true
 ---
 ## AWS ECS에 MongoDB ReplicaSet 구축하기
 MongoDB 운영 중 장애 발생에 대응하기 위해 Replica Set 구성을 해줘야 한다.
