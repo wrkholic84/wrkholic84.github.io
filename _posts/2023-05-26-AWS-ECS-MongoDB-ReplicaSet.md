@@ -120,8 +120,8 @@ ECS에서 사용할 작업을 만들어준다.
 명령 :   
 --replSet,< Replica Set Name >,--keyFile,/etc/mongodb.key,--bind_ip_all,--auth
 환경변수 :   
-MONGO_INITDB_ROOT_PASSWORD / <DB비밀번호>
-MONGO_INITDB_ROOT_USERNAME / <DB아이디>  
+MONGO_INITDB_ROOT_PASSWORD / < DB비밀번호 >
+MONGO_INITDB_ROOT_USERNAME / < DB아이디 >  
 스토리지 및 로깅>  
 탑재지점>  
 #1. mongodb-primary > /data/db  
