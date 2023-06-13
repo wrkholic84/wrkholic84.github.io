@@ -30,53 +30,6 @@ EC2 내부적으로 표시되는 이름은 /dev/xvdf ~ /dev/xvdp 로 바뀐다.
 ECS 인스턴스에서 (논리적으로)연결된 볼륨을 마운트한다.
 먼저, lsblk 명령으로 사용 가능한 디스크 디바이스 및 마운트 포인트를 확인
 Nitro 시스템 기반 인스턴스의 경우 아래와 같이 NVMe 블록 디바이스로 표시되고, 그 외(T2인스턴스 등)의 경우 /dev/xvda 등으로 표시된다.
-```bash
-[ec2-user@ip-0-0-0-0 ~]$ lsblk
-NAME          MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
-nvme0n1       259:0    0  30G  0 disk 
-├─nvme0n1p1   259:1    0  30G  0 part /
-└─nvme0n1p128 259:2    0   1M  0 part 
-nvme1n1       259:3    0  30G  0 disk 
-```
-nvme1n1 볼륨이 확인되었으니, 파일 시스템 유형을 확인해본다. data라고만 표시되면 파일 시스템이 없는 것이다.
-```bash
-[ec2-user@ip-0-0-0-0 ~]$ sudo file -s /dev/nvme1n1
-/dev/nvme1n1: data
-```
-다음으로 볼륨에 파일 시스템을 생성해본다. 데이터베이스로 사용할 볼륨이라, xfs 포멧으로 생성한다.
-```bash
-[ec2-user@ip-0-0-0-0 ~]$ sudo mkfs -t xfs /dev/nvme1n1
-```
-그리고 다시 파일 시스템 유형을 확인해보면, 아래와 같이 바뀌어 표시된다.
-```bash
-[ec2-user@ip-0-0-0-0 ~]$ sudo file -s /dev/nvme1n1
-```
-이제 원하는 경로에 볼륨을 마운트 한다.
-```bash
-[ec2-user@ip-0-0-0-0 ~]$ sudo mount /dev/nvme1n1 /mnt/data
-```
-그리고 다시 블록 디바이스 정보를 확인하면 아래와 같이 /mnt/data 에 마운트 된 것을 알 수 있다.
-```bash
-[ec2-user@ip-0-0-0-0 ~]$ lsblk
-NAME          MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
-nvme0n1       259:0    0  30G  0 disk 
-├─nvme0n1p1   259:1    0  30G  0 part /
-└─nvme0n1p128 259:2    0   1M  0 part 
-nvme1n1       259:3    0  30G  0 disk /mnt/data
-```
-
-### 3. MongoDB Replica Set에서 사용할 디렉토리 및 파일 생성
-위 그림과 같이 3개 DB를 운영하기 위한 데이터 디렉토리 3개와 Replica Set 인증키 파일 1개를 방금 마운트 한 볼륨에 생성해준다.
-```bash
-[ec2-user@ip-0-0-0-0 data]$ cd mongodb
-[ec2-user@ip-0-0-0-0 mongodb]$ pwd
-/mnt/data/mongodb
-[ec2-user@ip-0-0-0-0 mongodb]$ mkdir primary
-[ec2-user@ip-0-0-0-0 mongodb]$ mkdir secondary
-[ec2-user@ip-0-0-0-0 mongodb]$ mkdir arbiter
-[ec2-user@ip-0-0-0-0 mongodb]$ openssl rand -base64 756 > ./mongodb.key
-[ec2-user@ip-0-0-0-0 mongodb]$ chmod 400 ./mongodb.key
-```
 
 ### 4. 작업 정의
 ECS에서 사용할 작업을 만들어준다.
