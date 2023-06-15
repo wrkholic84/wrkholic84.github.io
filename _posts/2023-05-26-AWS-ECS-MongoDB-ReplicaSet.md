@@ -126,3 +126,18 @@ MONGO_INITDB_ROOT_USERNAME / < DB아이디 >
 탑재지점>  
 #1. mongodb-primary > /data/db  
 #2. mongodb-replica-key > /etc/mongodb.key  
+
+### 5. 서비스 시작
+ECS에 서비스로 위 작업을 시작시키면 데이터베이스 컨테이너 3개(PSA)가 동작한다.
+이후 Master DB에 접속해서 아래 작업을 진행한다.
+
+### 6. Replica Set 설정
+
+```bash
+test> rs.initiate({ _id: "원하는 ID", members: [ { _id: 0, host: "Master 아이피:포트" }, { _id: 1, host: "Slave 아이피:포트" }] });     # Primary, Second DB 추가
+test> db.adminCommand({ setDefaultRWConcern: 1, defaultWriteConcern: { w: 1 } });   # 쓰기 작업이 Replica Set의 Primary로 전달된 것의 확인을 요청. 쓰기 작업이 Secondary에 복제되기 전에 Primary가 다운되면 데이터를 롤백할 수 있습니다. Arbiter를 추가하기 위한 설정.
+test> rs.addArb("Arbiter 아이피:포트")  # Arbiter 추가
+test> cfg = rs.conf()
+tes> cfg.members[0].priority = 2    # Primary DB를 _id: 0번 DB로 고정
+tes> rs.reconfig(cfg)
+```
