@@ -22,7 +22,7 @@ SSH 포트 포워딩을 사용할 수 있는 단적인 예를 들어 보자. 나
 
 이 때, SSH 포트포워딩을 사용하면 SSH 터널링을 통해 웹 서버에 접근할 수 있다. 80 포트를 사용하는 서비스와 SSH 서버를 엮은 뒤 SSH 터널링을 생성하고, 사용자가 서비스를 요청하면 해당 요청은 SSH 서버로 전송된 뒤 A 서버 내부에서 다시 포워딩된다.
 
-![01](/assets/images/posts/20230614HTTPthroughSSHtunneling/01.jpg)
+![01](/assets/images/posts/20230614HTTPthroughSSHtunneling/01.png)
 
 일단 사용자와 서버 간의 SSH 터널링이 수립되고 나면 데이터의 요청 및 반환은 모두 SSH 서버를 통해 일어나므로 서버의 80 포트로 접근할 필요가 없다. 따라서 SSH 서버는 터널링을 통해 데이터를 주고받을 수 있게 해주는 일종의 프록시의 역할을 수행하게 된다. 
 
@@ -39,7 +39,7 @@ SSH 포트 포워딩에는 크게 2가지 종류가 있다. Local, Remote 모드
 
 당연하겠지만, SSH를 기반으로 하기 때문에 SSH Client와 SSH Server로 사용할 서버 각각 1대가 필요하다. VM을 사용해 아래와 같이 구성하였다. 
 
-![02](/assets/images/posts/20230614HTTPthroughSSHtunneling/02.jpg)
+![02](/assets/images/posts/20230614HTTPthroughSSHtunneling/02.png)
 
 테스트를 위해 SSH 서버에서는 Nginx 웹 서버를 80 포트와 바인딩해 컨테이너로 생성해 놓았다. SSH 포트 포워딩을 통해 SSH Client에서 해당 Nginx 웹 서버로 접근할 것이다.
 
@@ -48,11 +48,11 @@ SSH 포트 포워딩에는 크게 2가지 종류가 있다. Local, Remote 모드
 
 SSH 포트 포워딩은 연결을 수립하는 주체가 누구냐에 따라 Local과 Remote로 구분할 수 있다. Local은 가장 이해하기 쉽고 직관적인 경우로, 늘 하던 것처럼 SSH Client -> SSH Server로 연결을 수립하는 경우이다. 이해를 위해 간단한 예시를 통해 Local 포트 포워딩을 사용해보자.
 
-![03](/assets/images/posts/20230614HTTPthroughSSHtunneling/03.jpg)
+![03](/assets/images/posts/20230614HTTPthroughSSHtunneling/03.png)
 
 SSH Client는 SSH Server에 SSH로 접속할 수 있다. 그러나 Nginx 서버는 127.0.0.1:80으로 바인딩되어 있어 외부에서 접근할 수 없는 상황이다. SSH Client 에서 Nginx에 접근할 수 있도록 SSH 터널링 연결을 생성한다.
 
-![04](/assets/images/posts/20230614HTTPthroughSSHtunneling/04.jpg)
+![04](/assets/images/posts/20230614HTTPthroughSSHtunneling/04.png)
 
 가장 많이 헷갈리는 것이 SSH 포트 포워딩 시 '무엇을 어떻게 입력할지' 인데, 위 그림으로 이해할 수 있다. SSH Client에서 ssh -L [로컬에서 사용할 포트]:[최종적으로 접근할 곳] [SSH Server 주소] 형식으로 입력한다. SSH 터널이 생성된 뒤에는 [로컬에서 사용할 포트] 를 이용해 [최종적으로 접근할 곳] 에 접근할 수 있다.
 
@@ -98,7 +98,7 @@ Remote 포트 포워딩은 SSH Server -> SSH Client 로 연결을 수립해 SSH 
 
 간단한 예시를 들어보자. 외부로 나가는 트래픽은 허용되지만 내부로 들어오는 트래픽은 Firewall에 의해 전부 차단되는 상황을 가정한다. 물론 SSH 또한 사용할 수 없는 상황이다.
 
-![05](/assets/images/posts/20230614HTTPthroughSSHtunneling/05.jpg)
+![05](/assets/images/posts/20230614HTTPthroughSSHtunneling/05.png)
 
 이 때 Remote 포트 포워딩을 SSH Server에서 사용한다면 내부 네트워크에 쉽게 접속할 수 있다. Outbound 트래픽은 허용되는 상황이므로 SSH Server -> SSH Client로 SSH 터널(SSH 연결)을 생성한 뒤, SSH Client는 SSH Server가 접근 가능한 네트워크에 접속해 데이터를 주고 받는 방식이다.
 
@@ -106,7 +106,7 @@ Remote 포트 포워딩은 SSH Server -> SSH Client 로 연결을 수립해 SSH 
 
 어쨌든, 사용해보는 것이 가장 빠르게 이해할 수 있는 지름길이다.
 
-![06](/assets/images/posts/20230614HTTPthroughSSHtunneling/06.jpg)
+![06](/assets/images/posts/20230614HTTPthroughSSHtunneling/06.png)
 
 이번에는 SSH Server 에서 ssh -R [SSH Client가 사용할 포트]:[최종 목적지] [SSH Client 주소] 와 같은 형식으로 SSH 포트 포워딩을 실행한다. 당연하지만, SSH Client에서도 SSH 데몬이 실행 중이여야만 한다. SSH Server에서 SSH Client로 SSH 연결을 수립하기 때문이다.
 
