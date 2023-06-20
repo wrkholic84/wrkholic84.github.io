@@ -138,6 +138,6 @@ test> rs.initiate({ _id: "원하는 ID", members: [ { _id: 0, host: "Master 아�
 test> db.adminCommand({ setDefaultRWConcern: 1, defaultWriteConcern: { w: 1 } });   # 쓰기 작업이 Replica Set의 Primary로 전달된 것의 확인을 요청. 쓰기 작업이 Secondary에 복제되기 전에 Primary가 다운되면 데이터를 롤백할 수 있습니다. Arbiter를 추가하기 위한 설정.
 test> rs.addArb("Arbiter 아이피:포트")  # Arbiter 추가
 test> cfg = rs.conf()
-tes> cfg.members[0].priority = 2    # Primary DB를 _id: 0번 DB로 고정
-tes> rs.reconfig(cfg)
+test> cfg.members[0].priority = 2    # Primary DB를 _id: 0번 DB로 고정
+test> rs.reconfig(cfg)
 ```
