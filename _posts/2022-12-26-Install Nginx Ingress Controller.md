@@ -25,7 +25,7 @@ Nginx 기반 Ingress Controller는 다양한 종류가 있는데 대표적으로
 
 ```bash
 ubuntu@master:~$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/baremetal/deploy.yaml
-ubuntu@master:~$ kubectl delete validatingwebhookconfigurations.admissionregistration.k8s.io ingress-nginx-admission
+# buntu@master:~$ kubectl delete validatingwebhookconfigurations.admissionregistration.k8s.io ingress-nginx-admission 안해도 됨.
 ```
 
 ## Nginx Ingress Controller 테스트
@@ -39,7 +39,7 @@ ubuntu@master:~$ k create ns ingress-test
 2.2. 테스트용 웹서비스 Deployments로 생성
 
 ```bash
-ubuntu@master:~$ k -n ingress-test create deploy demo-web --image=rancher/hello-world --port 8080 --replicas 2
+ubuntu@master:~$ k -n ingress-test create deploy demo-web --image=rancher/hello-world --port 80 --replicas 2
 ```
 
 2.3. 서비스 생성
@@ -62,7 +62,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: demo.domain.com
+  - host: demo.domain.com   # test 땐 제거
     http:
       paths:
       - path: /test
@@ -91,7 +91,7 @@ ubuntu@master:~$ k -n ingress-nginx get svc
 NAME                                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
 ingress-nginx-controller             NodePort    10.97.203.183   <none>        80:31280/TCP,443:31227/TCP   138m
 ingress-nginx-controller-admission   ClusterIP   10.97.125.41    <none>        443/TCP                      138m
-ubuntu@master:~$ curl http://172.31.20.49:31280/test
+ubuntu@master:~$ curl http://<worker node IP>:31280/test
 You've hit demo-web-69d8dc7db6-lppch  # 잘됨
 ```
 

@@ -45,7 +45,7 @@ Mem:           1.8Gi       170Mi       1.3Gi       0.0Ki       318Mi       1.5Gi
 Swap:             0B          0B          0B
 ```
 
-1.4. iptables가 bridge된 트래픽을 보도록 설정 (Master, Worker)
+1.4. iptables가 bridge된 트래픽을 보도록 설정 (Master, Worker - Optional)
 
 ```bash
 root@master:~# cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
@@ -141,7 +141,7 @@ master   **NotReady**   control-plane   15m   v1.25.3
 ubuntu@master:~$ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
 ubuntu@master:~$ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
 ubuntu@master:~$ watch kubectl get pods -n calico-system
-Every 2.0s: kubectl get pods -n calico-system                                           hack8s.master: Sun Jan 28 09:38:36 2024
+Every 2.0s: kubectl get pods -n calico-system
 
 NAME                                       READY   STATUS    RESTARTS   AGE
 calico-kube-controllers-7885cc9d5c-2smx5   1/1     Running   0          87s
@@ -151,7 +151,7 @@ csi-node-driver-fcnqn                      2/2     Running   0          87s
 
 ubuntu@master:~$ kubectl get nodes
 NAME     STATUS   ROLES           AGE   VERSION
-master   **Ready**    control-plane   17m   v1.25.3
+master   **Ready**    control-plane   17m   v1.29.1
 ```
 
 ## Calico 라우팅 설정
