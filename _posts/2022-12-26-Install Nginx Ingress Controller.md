@@ -24,7 +24,7 @@ Nginx 기반 Ingress Controller는 다양한 종류가 있는데 대표적으로
 설치 후에 Ingress Controller의 validatingwebhookconfigurations을 삭제. 2020년 3월 업데이트 후 생긴건데, 인증 관련 보안업데이트로 생긴 것으로 보임. 삭제 후 진행.
 
 ```bash
-ubuntu@master:~$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/baremetal/deploy.yaml
+ubuntu@master:~$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/baremetal/deploy.yaml
 ubuntu@master:~$ kubectl delete validatingwebhookconfigurations.admissionregistration.k8s.io ingress-nginx-admission
 ```
 
@@ -39,13 +39,13 @@ ubuntu@master:~$ k create ns ingress-test
 2.2. 테스트용 웹서비스 Deployments로 생성
 
 ```bash
-ubuntu@master:~$ k -n ingress-test create deploy demo-web --image=rancher/hello-world --port 8080 --replicas 2
+ubuntu@master:~$ k -n ingress-test create deploy demo-web --image=whatwant/node-web:1.0 --port 8080 --replicas 2
 ```
 
 2.3. 서비스 생성
-target-port 가 rancher/hello-world의 포트
+
 ```bash
-ubuntu@master:~$ kubectl -n ingress-test expose deployment demo-web --name demo-web-svc --port=80 --target-port=80
+ubuntu@master:~$ kubectl -n ingress-test expose deployment demo-web --name demo-web-svc --port=80 --target-port=8080
 ```
 
 2.4. ingress resource 작성
