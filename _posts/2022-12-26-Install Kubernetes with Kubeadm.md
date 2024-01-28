@@ -12,7 +12,7 @@ mermaid: true
 #   height: 500
 #   alt: Responsive rendering of Chirpy theme on multiple devices.
 ---
-## Production 환경 구성
+## Production 환경 구성 : Kubernetes v1.29
 
 1.1. 노드간 원활한 통신을 위한 hostname 설정 (Master; worker 별도 설정 필요)
 
@@ -135,19 +135,28 @@ master   **NotReady**   control-plane   15m   v1.25.3
 
 ## CNI - Calico 설치
 
-5.1. Calico 설치 (참조 : [https://projectcalico.docs.tigera.io/getting-started/kubernetes/quickstart](https://projectcalico.docs.tigera.io/getting-started/kubernetes/quickstart))
+5.1. Calico 설치 (Master) (참조 : [https://projectcalico.docs.tigera.io/getting-started/kubernetes/quickstart](https://projectcalico.docs.tigera.io/getting-started/kubernetes/quickstart))
 
 ```bash
-root@master:~# kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.24.4/manifests/tigera-operator.yaml
-root@master:~# kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.24.4/manifests/custom-resources.yaml
-root@master:~# kubectl get nodes
+ubuntu@master:~$ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+ubuntu@master:~$ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+ubuntu@master:~$ watch kubectl get pods -n calico-system
+Every 2.0s: kubectl get pods -n calico-system                                           hack8s.master: Sun Jan 28 09:38:36 2024
+
+NAME                                       READY   STATUS    RESTARTS   AGE
+calico-kube-controllers-7885cc9d5c-2smx5   1/1     Running   0          87s
+calico-node-dxc8v                          1/1     Running   0          87s
+calico-typha-57fdd74c95-lrxjn              1/1     Running   0          87s
+csi-node-driver-fcnqn                      2/2     Running   0          87s
+
+ubuntu@master:~$ kubectl get nodes
 NAME     STATUS   ROLES           AGE   VERSION
 master   **Ready**    control-plane   17m   v1.25.3
 ```
 
 ## Calico 라우팅 설정
 
-6.1. calicoctl 설치
+6.1. calicoctl 설치 (Master)
 
 ```bash
 root@master:~# cd /usr/local/bin
@@ -183,11 +192,11 @@ root@master:~# calicoctl apply -f ./mycni.yaml
 
 ## Worker Node 연결
 
-7.1. Master Node에 Worker Node 연결
+7.1. Master Node에 Worker Node 연결 (Worker)
 
 ```bash
 # 4.1. 에서 실행한 명령의 결과로 token 값 출력. cri-socket 옵션 추가 할것.
-root@master:~# kubeadm join 172.x.x.x:6443 --token <token> \
+ubuntu@master:~$ sudo kubeadm join 172.x.x.x:6443 --token <token> \
         --discovery-token-ca-cert-hash <sha256:token> \
         --cri-socket unix:///var/run/cri-dockerd.sock
 ```
