@@ -160,7 +160,7 @@ master   **Ready**    control-plane   17m   v1.25.3
 
 ```bash
 root@master:~# cd /usr/local/bin
-root@master:/usr/local/bin# curl -L https://github.com/projectcalico/calico/releases/download/v3.24.4/calicoctl-linux-amd64 -o calicoctl
+root@master:/usr/local/bin# curl -L https://github.com/projectcalico/calico/releases/download/v3.27.0/calicoctl-linux-amd64 -o calicoctl
 root@master:/usr/local/bin# chmod +x ./calicoctl
 ```
 
