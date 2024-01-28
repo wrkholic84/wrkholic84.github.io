@@ -34,6 +34,11 @@ root@ip:~# vi /etc/hosts
 1.3. 노드 확인 - 2Core CPU, 2GB 이상 RAM, swap 메모리 비활성화. AWS는 기본적으로 swap 메모리가 비활성화 되어 있음.
 
 ```bash
+ubuntu@master:~$ sudo swapoff -a      // temp
+ubuntu@master:~$ sudo vi /etc/fstab   // perm
+swap 비활성화
+# /swap.img     none    swap    sw      0       0
+
 ubuntu@master:~$ free -h
                total        used        free      shared  buff/cache   available
 Mem:           1.8Gi       170Mi       1.3Gi       0.0Ki       318Mi       1.5Gi
@@ -62,18 +67,26 @@ root@master:~# sysctl --system
 2.1. Docker 엔진 설치 (Master, Worker)
 
 ```bash
-root@master:~# apt update
-root@master:~# apt install -y docker.io
-root@master:~# systemctl enable --now docker
+ubuntu@master:~$ sudo apt update
+ubuntu@master:~$ sudo apt-get install ca-certificates curl
+ubuntu@master:~$ sudo install -m 0755 -d /etc/apt/keyrings
+ubuntu@master:~$ sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+ubuntu@master:~$ sudo chmod a+r /etc/apt/keyrings/docker.asc
+ubuntu@master:~$ echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+ubuntu@master:~$ sudo apt-get update
+ubuntu@master:~$ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 2.2. cri-dockerd 설치 (Master, Worker)
-
 ```bash
-root@master:~# cat /etc/os-release  # OS 버전 확인
-root@master:~# wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.2.6/cri-dockerd_0.2.6.3-0.ubuntu-jammy_amd64.deb
-root@master:~# dpkg -i ./cri-dockerd_0.2.6.3-0.ubuntu-jammy_amd64.deb
-root@master:~# systemctl status cri-docker
+ubuntu@master:~$ sudo apt-get update
+ubuntu@master:~$ wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.9/cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb
+ubuntu@master:~$ sudo dpkg -i ./cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb
+ubuntu@master:~$ systemctl status cri-docker
 ```
 
 ## 3. kubeadm, kubelet, kubectl 설치
@@ -81,28 +94,28 @@ root@master:~# systemctl status cri-docker
 3.1. apt 패키지 색인 업데이트, kubernetes 패키지 설치 (Master, Worker)
 
 ```bash
-root@master:~# sudo apt-get update
-root@master:~# sudo apt-get install -y apt-transport-https ca-certificates curl
+ubuntu@master:~$ sudo apt-get update
+ubuntu@master:~$ sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 ```
 
-3.2. 구글 클라우드 public singing key (Master, Worker)
+3.2. public singing key (Master, Worker)
 
 ```bash
-root@master:~# sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+ubuntu@master:~$ curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 ```
 
 3.3. kubernetes repository 추가 (Master, Worker)
 
 ```bash
-root@master:~# echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+ubuntu@master:~$ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 ```
 
 3.4. apt package index update, kubelet, kubeadm, kubectl 설치 (Master, Worker)
 
 ```bash
-root@master:~# sudo apt-get update
-root@master:~# sudo apt-get install -y kubelet kubeadm kubectl
-root@master:~# sudo apt-mark hold kubelet kubeadm kubectl
+ubuntu@master:~$ sudo apt-get update
+ubuntu@master:~$ sudo apt-get install -y kubelet kubeadm kubectl
+ubuntu@master:~$ sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 ## 클러스터 생성
@@ -110,12 +123,12 @@ root@master:~# sudo apt-mark hold kubelet kubeadm kubectl
 4.1. Kubeadm을 이용한 Cluster 생성 (Master)
 
 ```bash
-root@master:~# kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket unix:///var/run/cri-dockerd.sock
+ubuntu@master:~$ sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket unix:///var/run/cri-dockerd.sock
 # kubectl을 사용할 수 있도록 아래 명령 실행 (위 명령의 실행결과로 나옴)
-root@master:~# mkdir -p $HOME/.kube
+ubuntu@master:~$ mkdir -p $HOME/.kube
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
-root@master:~# kubectl get nodes
+ubuntu@master:~$ kubectl get nodes
 NAME     STATUS     ROLES           AGE   VERSION
 master   **NotReady**   control-plane   15m   v1.25.3
 ```
