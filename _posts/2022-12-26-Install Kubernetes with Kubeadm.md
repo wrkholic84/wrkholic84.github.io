@@ -200,3 +200,12 @@ ubuntu@master:~$ sudo kubeadm join 172.x.x.x:6443 --token <token> \
         --discovery-token-ca-cert-hash <sha256:token> \
         --cri-socket unix:///var/run/cri-dockerd.sock
 ```
+
+## Alias 설정
+
+8.1 kubectl 대신 k 로 명령 실행 (Master)
+```bash
+# 꼭해야된다.
+ubuntu@master:~$ echo 'alias k=kubectl' >>~/.bashrc
+ubuntu@master:~$ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
+```
