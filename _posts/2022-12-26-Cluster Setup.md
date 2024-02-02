@@ -31,10 +31,10 @@ ubuntu@master:/etc/kubernetes/pki$ sudo openssl req -x509 -new -nodes -key ./dom
 
 apiserver.crt 인증서를 사용하는 이유는, 클러스터와 통신한다는 것이 결국 apiserver와 통신을 의미하기때문이다. 따라서 apiserver의 인증서를 사용한다.
 
-이 인증서를 위에서 만든 개발용 인증서로 사용하고 싶다면, kube-apiserver.yaml에서 -tls-cert-file 옵션을 변경해줘야한다.
+이 인증서를 위에서 만든 개발용 인증서로 사용하고 싶다면, kube-apiserver.yaml에서 -tls-cert-file과 -tls-private-key-file 옵션을 변경해줘야한다.
 
 ```bash
-ubuntu@master:~$ k config set-cluster domain.com --server https://172.x.x.x:6443 --embed-certs --certificate-authority=/etc/kubernetes/pki/apiserver.crt
+ubuntu@master:~$ k config set-cluster domain.com --server https://172.x.x.x:6443 --embed-certs --certificate-authority=/etc/kubernetes/pki/domain.com.ca.crt
 ```
 
 1.4. 운영자 PC 호스트파일 변경
