@@ -206,6 +206,8 @@ ubuntu@master:~$ sudo kubeadm join 172.x.x.x:6443 --token <token> \
 8.1 kubectl 대신 k 로 명령 실행 (Master)
 ```bash
 # 꼭해야된다.
+ubuntu@master:~$ source <(kubectl completion bash) # set up autocomplete in bash into the current shell, bash-completion package should be installed first.
+ubuntu@master:~$ echo "source <(kubectl completion bash)" >> ~/.bashrc # add autocomplete permanently to your bash shell.
 ubuntu@master:~$ echo 'alias k=kubectl' >>~/.bashrc
 ubuntu@master:~$ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
 ```
