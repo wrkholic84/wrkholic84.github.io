@@ -19,37 +19,31 @@ Nginx 기반 Ingress Controller는 다양한 종류가 있는데 대표적으로
 
 우리는 첫번째 Ingress Controller를 사용한다. (Kubernetes Docs 기준)
 
-## Nginx Ingress Controller 설치
-
+### Nginx Ingress Controller 설치
 설치 후에 Ingress Controller의 validatingwebhookconfigurations을 삭제. 2020년 3월 업데이트 후 생긴건데, 인증 관련 보안업데이트로 생긴 것으로 보임. 삭제 후 진행.
-
 ```bash
 ubuntu@master:~$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/baremetal/deploy.yaml
 # buntu@master:~$ kubectl delete validatingwebhookconfigurations.admissionregistration.k8s.io ingress-nginx-admission 안해도 됨.
 ```
 
-## Nginx Ingress Controller 테스트
-
-2.1. 테스트를 위한 Namespace 생성
-
+### Nginx Ingress Controller 테스트
+#### 1.1. 테스트를 위한 Namespace 생성
 ```bash
 ubuntu@master:~$ k create ns ingress-test
 ```
 
-2.2. 테스트용 웹서비스 Deployments로 생성
-
+#### 1.2. 테스트용 웹서비스 Deployments로 생성
 ```bash
 ubuntu@master:~$ k -n ingress-test create deploy demo-web --image=rancher/hello-world --port 80 --replicas 2
 ```
 
-2.3. 서비스 생성
+#### 1.3. 서비스 생성
 target-port 가 rancher/hello-world의 포트
 ```bash
 ubuntu@master:~$ kubectl -n ingress-test expose deployment demo-web --name demo-web-svc --port=80 --target-port=80
 ```
 
-2.4. ingress resource 작성
-
+#### 1.4. ingress resource 작성
 ```bash
 ubuntu@master:~$ vi ingress-test.yaml
 apiVersion: networking.k8s.io/v1
@@ -74,14 +68,12 @@ spec:
               number: 80
 ```
 
-2.5. ingress 반영
-
+#### 1.5. ingress 반영
 ```bash
 ubuntu@master:~$ k apply -f ./ingress-test.yaml
 ```
 
-2.6. 접속 테스트
-
+#### 1.6. 접속 테스트
 ```bash
 ubuntu@master:~$ k get nodes -o wide
 NAME     STATUS   ROLES           AGE     VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION    CONTAINER-RUNTIME
@@ -95,6 +87,5 @@ ubuntu@master:~$ curl http://<worker node IP>:31280/test
 You've hit demo-web-69d8dc7db6-lppch  # 잘됨
 ```
 
-## AWS ALB 설정
-
-3.1. AWS에서 로드밸런서의 대상그룹에 Worker Node 로 사용되는 EC2 등록. 포트는 31280.
+### AWS ALB 설정
+#### 2.1. AWS에서 로드밸런서의 대상그룹에 Worker Node 로 사용되는 EC2 등록. 포트는 31280.
