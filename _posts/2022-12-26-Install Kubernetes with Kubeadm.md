@@ -199,7 +199,7 @@ ubuntu@cplane:~$ sudo kubeadm join 172.x.x.x:6443 --token <token> \
 ```
 
 ### Alias 설정
-#### 7.1 kubectl 대신 k 로 명령 실행 (cplane)
+#### 7.1. kubectl 대신 k 로 명령 실행 (cplane)
 ```bash
 # 꼭해야된다.
 ubuntu@cplane:~$ source <(kubectl completion bash) # set up autocomplete in bash into the current shell, bash-completion package should be installed first.
@@ -207,3 +207,21 @@ ubuntu@cplane:~$ echo "source <(kubectl completion bash)" >> ~/.bashrc # add aut
 ubuntu@cplane:~$ echo 'alias k=kubectl' >>~/.bashrc
 ubuntu@cplane:~$ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
 ```
+
+### 필수 포트 설정
+#### 8.1 Control Plane
+|프로토콜|방향|포트 범위|용도|사용 주체|
+|---|---|---|---|---|
+|TCP|인바운드|6443|Kubernetes API Server|All|
+|TCP|인바운드|2379-2380|ectd Server Client API|kube-apiserver, etcd|
+|TCP|인바운드|10250|Kubelet API|Self, Control Plane|
+|TCP|인바운드|10259|kube-scheduler|Self|
+|TCP|인바운드|10257|kube-controller-manager|Self|
+|TCP|인바운드|179|Calico BGP|Data Plane|
+|TCP|인바운드|5473|Calico Networking with Typha|Data Plane|
+
+#### 8.2. Data Plane
+|프로토콜|방향|포트 범위|용도|사용 주체|
+|---|---|---|---|---|
+|TCP|인바운드|10250|Kubelet API|Self, Control Plane|
+|TCP|인바운드|30000-32767|NodePort Service|All|
