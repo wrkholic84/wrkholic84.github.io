@@ -221,7 +221,7 @@ ubuntu@cplane:~$ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
 |TCP|인바운드|5473|Calico Networking with Typha|Data Plane|
 
 #### 8.2. Data Plane
-| 프로토콜 | 방향 | 포트 범위 | 용도 | 사용 주체 |
-|--------|-----|---------|-----|--------|
-| TCP | 인바운드 | 10250 | Kubelet API | Self, Control Plane |
-| TCP | 인바운드 | 30000-32767 | NodePort Service | All |
+|프로토콜|방향|포트 범위|용도|사용 주체|  
+|--------|-----|---------|-----|--------|  
+|TCP|인바운드|10250|Kubelet API|Self, Control Plane|  
+|TCP|인바운드|30000-32767|NodePort Service|All|  
