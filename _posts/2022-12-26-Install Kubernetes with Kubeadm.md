@@ -212,7 +212,7 @@ ubuntu@cplane:~$ echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
 #### 8.1. Control Plane
 
 |프로토콜|방향|포트 범위|용도|사용 주체|
-|:---:|:---|:---:|:---|:---|
+|:---:|:---:|:---:|---|---|
 |TCP|인바운드|6443|Kubernetes API Server|All|
 |TCP|인바운드|2379-2380|ectd Server Client API|kube-apiserver, etcd|
 |TCP|인바운드|10250|Kubelet API|Self, Control Plane|
@@ -224,6 +224,6 @@ ubuntu@cplane:~$ echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
 #### 8.2. Data Plane
 
 |프로토콜|방향|포트 범위|용도|사용 주체|
-|:------:|:---|:---:|:---|:------|
+|:------:|:---:|:---:|---|------|
 |TCP|인바운드|10250|Kubelet API|Self, Control Plane|
 |TCP|인바운드|30000-32767|NodePort Service|All|
