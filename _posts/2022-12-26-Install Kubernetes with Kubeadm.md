@@ -165,7 +165,7 @@ ubuntu@cplane:~$ cd /usr/local/bin
 ubuntu@cplane:/usr/local/bin$ sudo curl -L https://github.com/projectcalico/calico/releases/download/v3.27.0/calicoctl-linux-amd64 -o calicoctl
 ubuntu@cplane:/usr/local/bin$ sudo chmod +x ./calicoctl
 ```
-calico는 기본적으로 Host Route 기능이 없기 때문에 아래와 같은 작업을 해줘야 한다. (참고 : [https://coffeewhale.com/calico-mode](https://coffeewhale.com/calico-mode)) 그런데 calico 3.42 버전에서는 아래와 같이 vxlan이 CrossSubnet으로 활성화되어 있다. 우리는 dplane 노드를 1개 사용하기 때문에 그냥 두도록 한다. 테스트해보니 1개 노드에 있는 여러 파드가 서로 통신하는데는 문제가 없어 보인다. 그래도 라우팅 옵션을 바꾸고 싶다면 6.3 진행.
+calico는 기본적으로 Host Route 기능이 없기 때문에 아래와 같은 작업을 해줘야 한다. (참고 : [https://coffeewhale.com/calico-mode](https://coffeewhale.com/calico-mode)) 그런데 calico 3.42 버전에서는 아래와 같이 vxlan이 CrossSubnet으로 활성화되어 있다. <strike>우리는 dplane 노드를 1개 사용하기 때문에 그냥 두도록 한다. 테스트해보니 1개 노드에 있는 여러 파드가 서로 통신하는데는 문제가 없어 보인다. 그래도 라우팅 옵션을 바꾸고 싶다면 6.3 진행.</strike> istio sidecar injection을 하려면 IP-in-IP 모드로 변경해야 한다. 
 ```bash
 ubuntu@cplane:~$ calicoctl get ippool -o wide
 NAME                  CIDR             NAT    IPIPMODE   VXLANMODE     DISABLED   DISABLEBGPEXPORT   SELECTOR
@@ -214,7 +214,7 @@ ubuntu@cplane:~$ echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
 |프로토콜|방향|포트 범위|용도|사용 주체|
 |:---:|:---:|:---:|---|---|
 |TCP|인바운드|6443|Kubernetes API Server|All|
-|TCP|인바운드|2379-2380|ectd Server Client API|kube-apiserver, etcd|
+|TCP|인바운드|2379-2380|etcd Server Client API|kube-apiserver, etcd|
 |TCP|인바운드|10250|Kubelet API|Self, Control Plane|
 |TCP|인바운드|10259|kube-scheduler|Self|
 |TCP|인바운드|10257|kube-controller-manager|Self|
