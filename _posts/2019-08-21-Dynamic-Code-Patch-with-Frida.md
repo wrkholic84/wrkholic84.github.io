@@ -33,7 +33,7 @@ Android나 iOS는 프로그램이 만들어지기 전에 코드 서명(Code Sign
 프로그램이 실행되는 순간 코드를 패치하여 프로그램의 흐름을 바꿔보자.
 별 다른 수정을 하지 않는다면 솔루션이 적용된 프로그램이기 때문에 탈옥 탐지 관련 코드가 실행되고 비정상 종료될 것이다. 따라서 이번 코드 패치의 목적은 <U>탈옥 탐지 관련 코드를 건너 뛰는 것</U>이 될 것이다.
 
-방법은 매우 다양하겠지만 간단한 패치만으로 목적을 달성해보자. branch 명령만으로 프로그램의 실행 흐름을 변경할 것이다. (ARM64 opcode를 알아야 한다. 참고: [opcode converter online](http://armconverter.com/))
+방법은 매우 다양하겠지만 간단한 패치만으로 목적을 달성해보자. branch 명령만으로 프로그램의 실행 흐름을 변경할 것이다. (ARM64 opcode를 알아야 한다. 참고: [opcode converter online](https://armconverter.com/))
 ![02](/assets/images/posts/20190821DynamicCodePatchWithFrida/02.png)
 최종적으로 실행하고자 하는 목표 코드는 0x100005a98 주소에 있는 코드다. 목적지를 이곳으로 정한 이유는 IDA로 분석했을 때 앱의 Main 함수로 추측되는 부분이었기 때문이다.
 ![03](/assets/images/posts/20190821DynamicCodePatchWithFrida/03.png)
