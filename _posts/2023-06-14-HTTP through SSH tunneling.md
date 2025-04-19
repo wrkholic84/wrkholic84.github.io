@@ -2,8 +2,8 @@
 title: "SSH 터널링을 통한 HTTP 통신"
 author: wrkholic84
 date: 2023-06-14 00:00:00 +0900
-categories: [Security, Web]
-tags: [SSH, Tunneling, Web]
+categories: [Security, web]
+tags: [SSH, Tunneling, web]
 math: true
 mermaid: true
 ---
@@ -59,7 +59,7 @@ SSH Client는 SSH Server에 SSH로 접속할 수 있다. 그러나 Nginx 서버�
 직접 해보자. 가장 먼저, SSH Server 에서는 Nginx 서버시 127.0.0.1:80 으로 바인딩되어 실행되고 있다.
 
 ```bash
-[root@ssh-server ~] docker ps --format '{{.Names}}\t{{.Image}}\t{{.Ports}}'
+[root@ssh-server ~] docker ps --format '{% raw %}{{.Names}}{% endraw %}\t{% raw %}{{.Image}}{% endraw %}\t{% raw %}{{.Ports}}{% endraw %}'
 vigilant_khorana        nginx   127.0.0.1:80->80/tcp
 ```
 

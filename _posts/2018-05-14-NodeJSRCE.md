@@ -2,7 +2,7 @@
 title: Node JS Serialization Vulnerability
 # author: wrkholic84
 date: 2018-05-24 00:00:00 +0900
-categories: [Security, Web]
+categories: [Security, web]
 tags: [NodeJS, web, vulnerability]
 math: true
 mermaid: true

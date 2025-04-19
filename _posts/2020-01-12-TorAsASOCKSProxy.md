@@ -2,7 +2,7 @@
 title: Tor as a SOCKS Proxy
 # author: wrkholic84
 date: 2020-01-12 00:00:00 +0900
-categories: [Security, Web]
+categories: [Security, web]
 tags: [proxy]
 math: true
 mermaid: true
