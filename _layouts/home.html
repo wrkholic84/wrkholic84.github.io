@@ -115,19 +115,21 @@ refactor: true
     </article>
     {%- if forloop.index == 1 -%}
       <!-- this runs once, right after the first post -->
-      <div class="ads-divider">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6628014577409434"
-          crossorigin="anonymous"></script>
-        <ins class="adsbygoogle"
-          style="display:block"
-          data-ad-format="fluid"
-          data-ad-layout-key="-gu+2+s-57+8q"
-          data-ad-client="ca-pub-6628014577409434"
-          data-ad-slot="3115440852"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </div>
+      <article class="card-wrapper card">
+        <div class="post-preview row g-0 flex-md-row-reverse">
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6628014577409434"
+            crossorigin="anonymous"></script>
+          <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-format="fluid"
+            data-ad-layout-key="-gu+2+s-57+8q"
+            data-ad-client="ca-pub-6628014577409434"
+            data-ad-slot="3115440852"></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </article>
     {%- endif -%}
   {% endfor %}
 </div>
