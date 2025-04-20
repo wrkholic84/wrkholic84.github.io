@@ -1,6 +1,6 @@
 ---
 title: "AWS ECS에 MongoDB ReplicaSet 구축"
-author: wrkholic84
+# author: wrkholic84
 date: 2023-05-24 00:00:00 +0900
 categories: [Cloud, AWS, MongoDB, ReplicaSet]
 tags: [AWS, ECS, DB]
